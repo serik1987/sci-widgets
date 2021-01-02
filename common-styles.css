@@ -60,3 +60,8 @@ blockquote{
     font-style: italic;
     font-weight: 300;
 }
+
+.buttons-wrapper{
+    text-align: center;
+    font-size: 0;
+}
