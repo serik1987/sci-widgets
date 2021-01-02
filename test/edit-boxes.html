@@ -1,0 +1,89 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="theme-color" content="#fafafa">
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js"></script>
+  <script src="constants.js"></script>
+  <script src="edit-boxes/sci-editor.js"></script>
+  <script src="edit-boxes/sci-input.js"></script>
+  <script src="edit-boxes/sci-textarea.js"></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Демонстрация работы sci-widgets</h1>
+
+  <p>sci-widgets - это мой собственный аналог uicontrol в MATLAB, имеющий следующие преимущества:</p>
+  <ul>
+    <li>Более быстрый</li>
+    <li>Более многофункциональный</li>
+    <li>Можно работать в системе удалённо</li>
+  </ul>
+
+  <h2>Простое поле ввода</h2>
+
+  <sci-input id="input" label="Имя пользователя" height="300" value="@ihna.ru"></sci-input>
+  <sci-input id="map-length" label="Размеры карты" dimension="length" value="12.4 mm"></sci-input>
+
+  <h2>Многострочное поле ввода</h2>
+
+  <sci-textarea id="prof-interests" label="Профессиональные интересы" value="Введите свои трудовые навыки"></sci-textarea>
+  <sci-textarea id="sci-interests" label="Научный интересы" minlength = "100"></sci-textarea>
+
+  <script>
+    let input = document.getElementById("input");
+    let mapLength = document.getElementById("map-length");
+
+    let profInterests = document.getElementById("prof-interests");
+    let sciInterests = document.getElementById("sci-interests");
+
+    let finisherId = null;
+    let finishString = null;
+
+    function addFinisher(){
+      finishString = input.value;
+      finisherId = input.addChecker((oldValue, newValue) => {
+        return newValue.endsWith(finishString);
+      });
+    }
+
+    function removeFinisher(){
+      if (finisherId !== null){
+        input.removeChecker(finisherId);
+        finisherId = null;
+      }
+    }
+
+    addFinisher();
+
+    let validatorId = input.addValidator(SciInput.EMAIL, "Пожалуйста, укажите корректный E-mail");
+    let numberValidator = mapLength.addNumberValidator(x => (x >= 10000 && x <= 20000),
+      "Введенное Вами значение длины выходит за рамки экспериментального диапазона");
+
+    mapLength.addEventListener("blur", event => console.log(event));
+    input.addEventListener("input", event => console.log("Entered: " + input.value));
+    mapLength.addEventListener("change", event => console.log("Changed: " + mapLength.value));
+
+    profInterests.addEventListener("input", event => console.log(profInterests.value));
+    sciInterests.addEventListener("change", event => console.log("CHANGED!"));
+
+  </script>
+
+</body>
+
+</html>
