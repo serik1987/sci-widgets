@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
+  <script src="buttons/sci-link-button.js" defer></script>
 
   <style>
     body{
@@ -23,7 +24,89 @@
 
 <body>
 
+  <h1>Демонстрация работы кнопок-ссылок</h1>
 
+  <h2>Обычная кнопка-ссылка</h2>
+  <sci-link-button label="Продолжить" id="continue" width="500"></sci-link-button>
+
+  <h2>Кнопка-ссылка с рисунком</h2>
+  <sci-link-button label="Сохранить" id="save">
+    <svg
+            slot="image"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+            version="1.1"
+            id="Capa_1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 14 14"
+            xml:space="preserve"
+            sodipodi:docname="save.svg"
+            width="14"
+            height="14">
+
+      <metadata id="metadata39">
+        <rdf:RDF>
+          <cc:Work rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            <dc:title />
+          </cc:Work>
+        </rdf:RDF>
+      </metadata>
+
+      <defs id="defs37" />
+      <sodipodi:namedview
+            pagecolor="#ffffff"
+            bordercolor="#666666"
+            borderopacity="1"
+            objecttolerance="10"
+            gridtolerance="10"
+            guidetolerance="10"
+            id="namedview35"
+            showgrid="false"/>
+
+      <path
+              d="M 13.813588,3.5919758 10.408109,0.18641212 C 10.28877,0.06707273 10.126921,4.2424242e-5 9.9581152,4.2424242e-5 H 8.2735758 C 8.2732788,4.2424242e-5 8.2730242,0 8.2727273,0 H 3.1818182 c -2.97e-4,0 -5.515e-4,4.2424242e-5 -8.485e-4,4.2424242e-5 H 0.63636364 C 0.28492121,4.2424242e-5 0,0.28496364 0,0.63640606 V 13.363636 C 0,13.715079 0.28492121,14 0.63636364,14 H 3.1818182 10.818182 13.363636 C 13.715079,14 14,13.715079 14,13.363636 V 4.0419273 C 14,3.8731636 13.93297,3.7112727 13.813588,3.5919758 Z M 3.8181818,1.2727697 H 5.0909091 V 2.969697 c 0,0.3514424 0.2849212,0.6363636 0.6363636,0.6363636 0.3514425,0 0.6363637,-0.2849212 0.6363637,-0.6363636 V 1.2727697 h 1.2727272 v 3.393897 H 3.8181818 Z M 10.181818,10.181818 H 3.8181818 V 8.9090909 h 6.3636362 z m -6.3636362,2.545455 v -1.272728 h 6.3636362 v 1.272728 z m 8.9090912,0 H 11.454545 V 8.2727273 c 0,-0.3514425 -0.284921,-0.6363637 -0.636363,-0.6363637 H 3.1818182 c -0.3514424,0 -0.6363637,0.2849212 -0.6363637,0.6363637 V 12.727273 H 1.2727273 V 1.2727697 h 1.2727272 v 4.0302606 c 0,0.3514424 0.2849213,0.6363636 0.6363637,0.6363636 h 5.0909091 c 0.3514424,0 0.6363636,-0.2849212 0.6363636,-0.6363636 V 1.2727697 h 0.7854849 l 3.0326972,3.0327394 z"
+              id="path2"
+              style="stroke-width:0.04242424;fill-opacity:1"/>
+      <g id="g4" transform="translate(0,-316)"></g>
+      <g id="g6" transform="translate(0,-316)"></g>
+      <g id="g8" transform="translate(0,-316)"></g>
+      <g id="g10" transform="translate(0,-316)"></g>
+      <g id="g12" transform="translate(0,-316)"></g>
+      <g id="g14" transform="translate(0,-316)"></g>
+      <g id="g16" transform="translate(0,-316)"></g>
+      <g id="g18" transform="translate(0,-316)"></g>
+      <g id="g20" transform="translate(0,-316)"></g>
+      <g id="g22" transform="translate(0,-316)"></g>
+      <g id="g24" transform="translate(0,-316)"></g>
+      <g id="g26" transform="translate(0,-316)"></g>
+      <g id="g28" transform="translate(0,-316)"></g>
+      <g id="g30" transform="translate(0,-316)"></g>
+      <g id="g32" transform="translate(0,-316)"></g>
+    </svg>
+  </sci-link-button>
+
+  <h2>Кнопка с переходом по внешней ссылке</h2>
+  <sci-link-button label="Перейти на Google" href="https://www.google.com" id="google"></sci-link-button>
+
+  <script>
+    let Continue = document.getElementById("continue");
+
+    document.body.addEventListener("click", event => {
+      console.log(event.target);
+    });
+
+    document.body.addEventListener("change", event => {
+      console.log(event.target);
+      console.log("Value: " + event.target.value);
+    });
+  </script>
 
 </body>
 

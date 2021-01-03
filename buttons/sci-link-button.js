@@ -108,6 +108,12 @@ class SciLinkButton extends SciWidget{
         return this.__defaultValue;
     }
 
+    get errorMessage(){
+        return null;
+    }
+
+    set errorMessage(value) {}
+
     get href(){
         return this.getAttribute("href");
     }
@@ -210,7 +216,7 @@ class SciLinkButton extends SciWidget{
 
 SciLinkButton.themes = ["black", "blue", "gray", "gray-to-black", "gray-to-blue"];
 
-SciLinkButton.observedAttributes = ["active", "disabled", "label", "menu", "theme", "toggleable"];
+SciLinkButton.observedAttributes = ["active", "disabled", "label", "menu", "theme", "toggleable", "width"];
 
 SciLinkButton.template = null;
 
