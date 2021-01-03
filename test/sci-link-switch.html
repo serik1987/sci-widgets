@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <meta name="theme-color" content="#fafafa">
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="buttons/sci-link-button.js" defer></script>
+  <script src="buttons/sci-link-switch.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Группы кнопок-ссылок</h1>
+
+  <h2>Вертикальные кнопки-ссылки</h2>
+
+  <sci-link-switch position="vertical" id="example1">
+    <sci-link-button label="Опция 1" value="x1"></sci-link-button>
+    <sci-link-button label="Опция 2" value="x2"></sci-link-button>
+    <sci-link-button label="Опция 3" value="x3"></sci-link-button>
+  </sci-link-switch>
+
+  <h2>Горизонтальные кнопки-ссылки</h2>
+
+  <div>
+    Тип карты:
+    <sci-link-switch position="horizontal" id="example2" value="phase" disabled>
+      <sci-link-button label="Амплитудная" value="amplitude"></sci-link-button>
+      <sci-link-button label="Фазовая" value="phase"></sci-link-button>
+    </sci-link-switch>
+  </div>
+
+<script>
+  document.body.addEventListener("change", event => {
+      console.log(event.target);
+      console.log(event.target.value);
+  });
+</script>
+
+</body>
+
+</html>
