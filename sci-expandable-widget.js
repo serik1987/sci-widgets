@@ -2,6 +2,8 @@ class SciExpandableWidget extends SciWidget{
 
     constructor(){
         super();
+
+        this.__quiet = false;
     }
 
     _createTemplate(templateText){
@@ -30,8 +32,16 @@ class SciExpandableWidget extends SciWidget{
                 return;
             }
 
-            self.opened = !self.opened;
+            if (!event.sci_closed_by_document) {
+                self.opened = !self.opened;
+            }
         });
+
+        this.content.addEventListener("click", event => {
+            this.__quiet = true;
+            self.open();
+            this.__quiet = false;
+        }, true);
 
         this.content.addEventListener("click", event => {
             event.stopPropagation();
@@ -45,7 +55,10 @@ class SciExpandableWidget extends SciWidget{
         document.addEventListener("click", event => {
             let target = event.target.closest(self.tagName);
             if (target !== self){
-                self.close();
+                if (self.opened){
+                    self.close();
+                    event.sci_closed_by_document = true;
+                }
             }
         }, true);
     }
@@ -55,13 +68,15 @@ class SciExpandableWidget extends SciWidget{
             if (this._autoadjustOpen) {
                 this._adjustOpen();
             }
-            let newEvent;
-            if (newValue !== null){
-                newEvent = new CustomEvent("sci-open", {bubbles: true});
-            } else {
-                newEvent = new CustomEvent("sci-close", {bubbles: true});
+            if (!this.__quiet) {
+                let newEvent;
+                if (newValue !== null) {
+                    newEvent = new CustomEvent("sci-open", {bubbles: true});
+                } else {
+                    newEvent = new CustomEvent("sci-close", {bubbles: true});
+                }
+                this.dispatchEvent(newEvent);
             }
-            this.dispatchEvent(newEvent);
         } else {
             super.attributeChangedCallback(name, oldValue, newValue);
         }

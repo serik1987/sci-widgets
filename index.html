@@ -1,22 +1,20 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="ru">
 
 <head>
+
   <meta charset="utf-8">
   <title>SciWidgets test page</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <meta name="theme-color" content="#fafafa">
-
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
   <script src="sci-expandable-widget.js" defer></script>
   <script src="datetime/sci-date.js" defer></script>
-  <script src="edit-boxes/sci-editor.js" defer></script>
-  <script src="edit-boxes/sci-input.js" defer></script>
+  <script src="datetime/sci-date-range.js" defer></script>
 
   <style>
     body{
@@ -32,6 +30,12 @@
       right: 10px;
       bottom: 252px;
     }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
   </style>
 </head>
 
@@ -40,42 +44,68 @@
   <div class="ruler"></div>
 
   <h1>Демонстрация работы календаря</h1>
-
-  <h2>Простой календарь, обязателен для заполнения</h2>
+  <h2>Одиночные календари для дат</h2>
+  <h3>Простой календарь, обязателен для заполнения</h3>
 
   <sci-date label="Дата начала эксперимента" id="simple" required></sci-date>
-
   <p>Текст после календаря</p>
 
-  <h2>Пример деактивированного календаря</h2>
-
+  <h3>Пример деактивированного календаря</h3>
   <sci-date label="Дата подачи заявки на эксперимент" id="disabled" disabled></sci-date>
 
-  <h2>Календарь, ограниченный по ширине</h2>
-
+  <h3>Календарь, ограниченный по ширине</h3>
   <sci-date label="Дата поездки" id="small" width="400"></sci-date>
 
-  <h2>Календарь с датой, заданной по-умолчанию</h2>
-
+  <h3>Календарь с датой, заданной по-умолчанию</h3>
   <sci-date label="Дата рождения" id="defdate" value="1987-04-21"></sci-date>
 
-  <h2>Нераскрывающийся календарь</h2>
-
+  <h3>Нераскрывающийся календарь</h3>
   <sci-date label="Дата начала регистрации" id="inline_date" inline></sci-date>
 
-  <h2>Нераскрывающийся неактивный календарь</h2>
-
+  <h3>Нераскрывающийся неактивный календарь</h3>
   <sci-date label="Дата окончания регистрации" id="inline_disabled" inline disabled></sci-date>
 
-  <h2>Нераскрывающийся активный календарь с обязательным указаниеем даты</h2>
-
+  <h3>Нераскрывающийся активный календарь с обязательным указаниеем даты</h3>
   <sci-date label="Дата введения пропофола" id="inline_required" inline required></sci-date>
 
-  <h2>Календарь с предельно допустимыми минимальным и максимальным значениями</h2>
-
+  <h3>Календарь с предельно допустимыми минимальным и максимальным значениями</h3>
   <sci-date label="Дата подачи заявки" id="restricted" minvalue="2020-08-15" maxvalue="2020-11-10"></sci-date>
 
+  <h2>Диапазоны дат</h2>
+  <h3>Простой диапазон дат</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="simple_range"></sci-date-range>
+
+  <h3>Диапазон дат в вертикальным расположением</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" in-block></sci-date-range>
+
+  <h3>Диапазон дат с дефолтными значениями</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="def_range"
+                  start-value="2010-08-01" finish-value="2010-08-29"></sci-date-range>
+
+  <h3>Нераскрывающийся диапазон дат</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inline_range" inline>
+  </sci-date-range>
+
+  <h3>Диапазон дат с максимальным и минимальным значениями</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="restricted_range"
+    minvalue="2010-01-01" maxvalue="2010-12-31"></sci-date-range>
+
+  <h3>Диапазон дат с требованием заполнить его полностью</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="travel_range" required>
+  </sci-date-range>
+
+  <h3>Диапазон дат неактивен</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inactive_range" disabled>
+  </sci-date-range>
+
+  <h3>Встроенный диапазон дат неактивен</h3>
+  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inline_disabled_range"
+                  inline disabled></sci-date-range>
+
+
+
   <script>
+
     document.body.addEventListener("sci-open", event => {
       console.log("sci open");
       console.log(event.target);
@@ -89,6 +119,12 @@
     document.querySelector("#simple").addEventListener("change", event => {
         console.log("changed");
         console.log(event.target.value);
+    });
+
+    document.getElementById("simple_range").addEventListener("change", event => {
+        console.log("changed");
+        console.log(event.target.startValue);
+        console.log(event.target.finishValue);
     });
   </script>
 

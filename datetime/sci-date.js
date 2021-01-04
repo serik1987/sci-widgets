@@ -74,7 +74,10 @@ class SciDate extends SciExpandableWidget{
                 return;
             }
 
-            self.__currentDate.setMonth(self.__currentDate.getMonth() - 1);
+            let m = this.__currentDate.getMonth();
+            while (this.__currentDate.getMonth() === m){
+                this.__currentDate.setMonth(m-1);
+            }
             self._updateCurrentValue();
         });
 
@@ -132,10 +135,12 @@ class SciDate extends SciExpandableWidget{
         calendar.innerHTML = "";
         let iterationDate = new Date(currentDate);
         iterationDate.setDate(1);
+        let nextDate = new Date(iterationDate);
+        nextDate.setMonth(nextDate.getMonth() + 1);
         while (iterationDate.getDay() !== 1){
             iterationDate.setDate(iterationDate.getDate() - 1);
         }
-        while (iterationDate.getMonth() !== currentDate.getMonth() + 1 || iterationDate.getDay() !== 1){
+        while (iterationDate.getMonth() !== nextDate.getMonth() || iterationDate.getDay() !== 1){
             let classList = [];
             if (this.__value !== null && this.__value.getTime() === iterationDate.getTime()){
                 classList.push("selected");
@@ -252,7 +257,7 @@ class SciDate extends SciExpandableWidget{
     }
 
     get maxValue(){
-        if (this.getAttribute("minvalue") === null){
+        if (this.getAttribute("maxvalue") === null){
             return null;
         }
         let d = new Date(this.getAttribute("maxvalue"));
@@ -343,6 +348,10 @@ SciDate.templateText = `
 <style>
     @import url(../core-styles.css);
     
+    :host{
+        width: 345px;
+    }
+    
     :host([inline]) .error-message{
         text-align: center;
         margin-top: -5px;
@@ -351,6 +360,7 @@ SciDate.templateText = `
     
     :host .content{
         padding: 5px;
+        width: 333px;
     }
     
     :host([inline]) .content{
@@ -419,6 +429,7 @@ SciDate.templateText = `
     :host .content table{
         border-spacing: 5px;
         margin: 0 auto;
+        width: 333px;
     }   
     
     :host .content table td, :host .content table th{
@@ -451,6 +462,26 @@ SciDate.templateText = `
     :host .content table td.wrong-month{
         color: rgb(186, 196, 209);
     }
+    
+    @media screen and (max-width: 400px){
+        :host{
+            width: 290px;
+        }
+        
+        :host .content{
+            width: 278px;
+        }
+        
+        :host .content table{
+            width: 278px;
+        }
+        
+        :host .content table td, :host .content table th{
+            padding: 0 5px;
+            width: 33px;
+        }       
+    }
+    
 </style>
 <div class="content">
     <div class="row">
