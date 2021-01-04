@@ -13,17 +13,84 @@
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
+  <script src="sci-expandable-widget.js" defer></script>
+  <script src="datetime/sci-date.js" defer></script>
+  <script src="edit-boxes/sci-editor.js" defer></script>
+  <script src="edit-boxes/sci-input.js" defer></script>
 
   <style>
     body{
       margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
     }
   </style>
 </head>
 
 <body>
 
+  <div class="ruler"></div>
 
+  <h1>Демонстрация работы календаря</h1>
+
+  <h2>Простой календарь, обязателен для заполнения</h2>
+
+  <sci-date label="Дата начала эксперимента" id="simple" required></sci-date>
+
+  <p>Текст после календаря</p>
+
+  <h2>Пример деактивированного календаря</h2>
+
+  <sci-date label="Дата подачи заявки на эксперимент" id="disabled" disabled></sci-date>
+
+  <h2>Календарь, ограниченный по ширине</h2>
+
+  <sci-date label="Дата поездки" id="small" width="400"></sci-date>
+
+  <h2>Календарь с датой, заданной по-умолчанию</h2>
+
+  <sci-date label="Дата рождения" id="defdate" value="1987-04-21"></sci-date>
+
+  <h2>Нераскрывающийся календарь</h2>
+
+  <sci-date label="Дата начала регистрации" id="inline_date" inline></sci-date>
+
+  <h2>Нераскрывающийся неактивный календарь</h2>
+
+  <sci-date label="Дата окончания регистрации" id="inline_disabled" inline disabled></sci-date>
+
+  <h2>Нераскрывающийся активный календарь с обязательным указаниеем даты</h2>
+
+  <sci-date label="Дата введения пропофола" id="inline_required" inline required></sci-date>
+
+  <h2>Календарь с предельно допустимыми минимальным и максимальным значениями</h2>
+
+  <sci-date label="Дата подачи заявки" id="restricted" minvalue="2020-08-15" maxvalue="2020-11-10"></sci-date>
+
+  <script>
+    document.body.addEventListener("sci-open", event => {
+      console.log("sci open");
+      console.log(event.target);
+    });
+
+    document.body.addEventListener("sci-close", event => {
+        console.log("sci close");
+        console.log(event.target);
+    });
+
+    document.querySelector("#simple").addEventListener("change", event => {
+        console.log("changed");
+        console.log(event.target.value);
+    });
+  </script>
 
 </body>
 

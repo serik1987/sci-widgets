@@ -59,3 +59,90 @@ a:active, a:hover{
     display: inline-block;
     width: auto;
 }
+
+
+
+
+/* Core styles for expandables */
+
+:host .hamburger{
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+    position: relative;
+}
+
+:host([disabled]) .hamburger{
+    border-bottom-color: rgb(186, 196, 209);
+}
+
+:host .hamburger .icon{
+    float: right;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
+:host([opened]) .hamburger .icon{
+    transform: rotate(180deg);
+}
+
+:host([disabled]) .hamburger .icon{
+    fill: rgb(186, 196, 209);
+}
+
+:host .hamburger .text{
+    height: 18px;
+    line-height: 18px;
+}
+
+:host([disabled]) .hamburger .text{
+    color: rgb(186, 196, 209);
+}
+
+:host .hamburger .content{
+    display: none;
+    position: absolute;
+    border: 1px solid #333;
+    background:#fff;
+    left: 0;
+    top: 100%;
+    right: 0;
+    cursor: default;
+    box-shadow: 0 10px 10px -5px #aaa;
+    z-index: 1;
+}
+
+:host([opened]) .hamburger .content{
+    display: block;
+}
+
+:host([inline]) .hamburger{
+    border-bottom: none;
+}
+
+:host([inline]) .hamburger svg{
+    display: none;
+}
+
+:host([inline]) .hamburger .text{
+    display: none;
+}
+
+:host([inline]) .content{
+    display: block;
+    position: static;
+    border: none;
+    box-shadow: none;
+
+}
+
+@media screen and (max-width: 480px){
+    :host .hamburger .text{
+        height: 25px;
+        line-height: 25px;
+    }
+
+    :host .hamburger .icon{
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+}
