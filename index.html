@@ -12,9 +12,13 @@
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
+  <script src="edit-boxes/sci-editor.js" defer></script>
+  <script src="edit-boxes/sci-input.js" defer></script>
   <script src="sci-expandable-widget.js" defer></script>
   <script src="datetime/sci-date.js" defer></script>
   <script src="datetime/sci-date-range.js" defer></script>
+  <script src="edit-boxes/sci-spin-input.js" defer></script>
+  <script src="datetime/sci-time.js" defer></script>
 
   <style>
     body{
@@ -102,6 +106,39 @@
   <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inline_disabled_range"
                   inline disabled></sci-date-range>
 
+  <h3>Выбор времени</h3>
+  <sci-time label="Время начала эксперимента" id="timewidget"></sci-time>
+
+  <h3>Выбор времени с дефолтным указанием самого времени</h3>
+  <sci-time label="Время начала эксперимента" value="9:03" id="deftime1"></sci-time>
+  <sci-time label="Время начала эксперимента" value="9:03:48" id="deftime2"></sci-time>
+  <sci-time label="Время начала эксперимента" value="9:03:48.356" id="deftime3"></sci-time>
+
+  <h3>Поддержка времени в секундах</h3>
+  <sci-time label="Время начала эксперимента" seconds id="timeseconds1"></sci-time>
+  <sci-time label="Время начала эксперимента" value="9:03:48" seconds id="timeseconds2"></sci-time>
+
+  <h3>Отображение миллисекунд</h3>
+  <sci-time label="Время начала эксперимента" seconds millis id="millis1"></sci-time>
+  <sci-time label="Время начала эксперимента" value="9:03:48.356" seconds millis id="millis2"></sci-time>
+
+  <h3>Относительное время без указания часов</h3>
+  <sci-time label="Длительность эксперимента" relative id="r1"></sci-time>
+  <sci-time label="Длительность эксперимента" relative millis id="r2" value="12:03.308"></sci-time>
+
+  <h3>Относительное время с часами</h3>
+  <sci-time label="Длительность эксперимента" hours relative required id="hr1"></sci-time>
+  <sci-time label="Длительность эксперимента" hours relative id="hr2" value="2:00:00"></sci-time>
+  <sci-time label="Длительность эксперимента" hours relative millis id="hr3" value="12:03.308"></sci-time>
+
+  <h3>Время с указанием границ диапазона</h3>
+  <sci-time label="Время начала эксперимента" minvalue="9:00" maxvalue="23:00" id="rt1"></sci-time>
+  <sci-time label="Время начала эксперимента" minvalue="9:00" maxvalue="23:00" value="7:00" id="rt2"></sci-time>
+
+  <h3>Время деактивировано</h3>
+  <sci-time label="Время окончания экперимента" value="23:00" id="dt" disabled></sci-time>
+
+
 
 
   <script>
@@ -125,6 +162,20 @@
         console.log("changed");
         console.log(event.target.startValue);
         console.log(event.target.finishValue);
+    });
+
+    for (let widget of ["timewidget", "timeseconds1", "millis1", "hr1", "r1", "rt1"]){
+      let element = document.getElementById(widget);
+      element.addEventListener("sci-overspin-up", event => {
+        console.log("overspin up");
+      });
+      element.addEventListener("sci-overspin-down", event => {
+        console.log("overspin down");
+      });
+    }
+
+    document.getElementById("timewidget").addEventListener("change", event => {
+      console.log(event.target.value);
     });
   </script>
 

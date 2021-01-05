@@ -37,6 +37,7 @@ class SciInput extends SciEditor{
             if (!checkerResult){
                 input.value = this.__oldValue;
             } else {
+                input.value = newValue;
                 this.__oldValue = newValue;
             }
             let newEvent = new InputEvent(event.type, event);
@@ -285,6 +286,7 @@ class SciInput extends SciEditor{
 
     set value(value){
         this.shadowRoot.querySelector("input").value = value;
+        this.__oldValue = value;
     }
 
     get units(){
