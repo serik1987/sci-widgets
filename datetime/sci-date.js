@@ -313,6 +313,9 @@ class SciDate extends SciExpandableWidget{
             this.errorMessage = "Пожалуйста, укажите дату";
             throw new TypeError("sci-date: the date was not set by the user");
         }
+        if (value !== null){
+            value = new Date(value);
+        }
         return value;
     }
 

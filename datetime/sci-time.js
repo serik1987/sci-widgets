@@ -124,6 +124,7 @@ class SciTime extends SciSpinInput{
 
     __updateValue(){
         let value = this.__value;
+        let pos = this._input.selectionStart;
         if (value === null){
             value = {hour: 0, minute: 0, second: 0, millisecond: 0};
             this.__value = value;
@@ -133,12 +134,16 @@ class SciTime extends SciSpinInput{
         let max_ts = SciTime.timestamp(this.maxValue);
         if (min_ts !== null && value_ts < min_ts){
             Object.assign(value, this.minValue);
-            let evt = new CustomEvent("sci-overspin-down", {});
+            let evt = new CustomEvent("sci-overspin-down", {
+                detail: {source: "limits"}
+            });
             this.dispatchEvent(evt);
         }
         if (max_ts !== null && value_ts > max_ts){
             Object.assign(value, this.maxValue);
-            let evt = new CustomEvent("sci-overspin-up", {});
+            let evt = new CustomEvent("sci-overspin-up", {
+                detail: {source: "limits"}
+            });
             this.dispatchEvent(evt);
         }
         let valueString = "";
@@ -161,7 +166,7 @@ class SciTime extends SciSpinInput{
             }
             valueString += ":" + second;
         }
-        if (this.millis){
+        if (this.seconds && this.millis){
             let millisecond = value.millisecond.toString();
             while (millisecond.length < 3){
                 millisecond = "0" + millisecond;
@@ -169,6 +174,8 @@ class SciTime extends SciSpinInput{
             valueString += "." + millisecond;
         }
         this._input.value = valueString;
+        this._input.selectionStart = pos;
+        this._input.selectionEnd = pos;
     }
 
     __processSpinUp(){
@@ -186,7 +193,9 @@ class SciTime extends SciSpinInput{
         }
         let afterspinResult = this.__afterSpin(spinningValue);
         if (!spinResult || !afterspinResult){
-            let event = new CustomEvent("sci-overspin-up", {});
+            let event = new CustomEvent("sci-overspin-up", {
+                detail: {source: spinningValue}
+            });
             this.dispatchEvent(event);
         }
     }
@@ -206,7 +215,9 @@ class SciTime extends SciSpinInput{
         }
         let afterspinResult = this.__afterSpin(spinningValue);
         if (!spinResult || !afterspinResult){
-            let event = new CustomEvent("sci-overspin-down", {});
+            let event = new CustomEvent("sci-overspin-down", {
+                detail: {source: spinningValue}
+            });
             this.dispatchEvent(event);
         }
     }
@@ -222,7 +233,7 @@ class SciTime extends SciSpinInput{
                 return "minute";
             } else if (pos >= 6 && pos <= 8 && this.seconds) {
                 return "second";
-            } else if (pos >= 9 && pos <= 12 && this.millis){
+            } else if (pos >= 9 && pos <= 12 && this.seconds && this.millis){
                 return "millisecond";
             } else {
                 return null;
@@ -232,7 +243,7 @@ class SciTime extends SciSpinInput{
                 return "minute";
             } else if (pos >= 3 && pos <= 5){
                 return "second";
-            } else if (pos >= 6 && pos <= 9 && this.millis){
+            } else if (pos >= 6 && pos <= 9 && this.seconds && this.millis){
                 return "millisecond";
             }
         }
@@ -398,13 +409,13 @@ class SciTime extends SciSpinInput{
 
     set maxValue(value){
         let time = {};
-        if (typeof value === "string"){
+        if (value === null){
+            this.__maxValue = null;
+            return;
+        } else if (typeof value === "string"){
             time = this.__parseTime(value);
         } else if (typeof value === "object") {
             Object.assign(time, value);
-        } else if (value === null){
-            this.__maxValue = null;
-            return;
         } else {
             throw new TypeError("sci-time: the time value was entered incorrectly");
         }
@@ -435,13 +446,13 @@ class SciTime extends SciSpinInput{
 
     set minValue(value){
         let time = {};
-        if (typeof value === "string"){
+        if (value === null){
+            this.__minValue = null;
+            return;
+        } else if (typeof value === "string"){
             time = this.__parseTime(value);
         } else if (typeof value === "object"){
             Object.assign(time, value);
-        } else if (value === null){
-            this.__minValue = null;
-            return;
         } else {
             throw new TypeError("sci-time: the time value was entered incorrectly");
         }
@@ -493,12 +504,14 @@ class SciTime extends SciSpinInput{
             this._input.errorMessage = "Укажите время";
             throw new TypeError("sci-time: the time value was not entered by the user");
         }
-        return value;
+        return Object.assign(value);
     }
 
     set value(value){
         let time = {};
-        if (typeof value === "string") {
+        if (value === null){
+            time = null;
+        } else if (typeof value === "string") {
             time = this.__parseTime(value);
         } else if (typeof value === "object" && value instanceof Date){
             time = {
@@ -510,8 +523,6 @@ class SciTime extends SciSpinInput{
         } else if (typeof value === "object"){
             Object.assign(time, value);
             this.__checkTime(time);
-        } else if (value === null) {
-            time = null;
         } else {
             throw new TypeError("sci-time: error in setting value property");
         }

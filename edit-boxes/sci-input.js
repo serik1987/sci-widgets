@@ -409,6 +409,8 @@ SciEditor.templateText = `
                 outline: none;
                 width: 100%;
                 padding: 0px;
+                height: 21px;
+                line-height: 21px;
             }
             
             input[disabled]{

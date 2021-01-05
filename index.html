@@ -19,6 +19,7 @@
   <script src="datetime/sci-date-range.js" defer></script>
   <script src="edit-boxes/sci-spin-input.js" defer></script>
   <script src="datetime/sci-time.js" defer></script>
+  <script src="datetime/sci-datetime.js" defer></script>
 
   <style>
     body{
@@ -136,9 +137,24 @@
   <sci-time label="Время начала эксперимента" minvalue="9:00" maxvalue="23:00" value="7:00" id="rt2"></sci-time>
 
   <h3>Время деактивировано</h3>
-  <sci-time label="Время окончания экперимента" value="23:00" id="dt" disabled></sci-time>
+  <sci-time label="Время окончания экперимента" value="23:00" id="td" disabled></sci-time>
 
+  <h2>Дата и время</h2>
+  <sci-datetime label="начала эксперимента" id="dt1"></sci-datetime>
+  <sci-datetime label="окончания эксперимента" value="2010-03-11 9:03" id="dt2"></sci-datetime>
+  <sci-datetime label="регистрации" seconds millis id="dt3"></sci-datetime>
 
+  <h3>Неактивный виджет</h3>
+  <sci-datetime label="начала эксперимента" disabled id="dtd"></sci-datetime>
+
+  <h3>Встроенный виджет</h3>
+  <sci-datetime label="начала эксперимента" inline></sci-datetime>
+
+  <h3>Виджет с минимальной и максимальной датами</h3>
+  <sci-datetime label="начала эксперимента" minvalue="2011-03-11 9:00" maxvalue="2011-03-15 21:00" id="dtr"></sci-datetime>
+
+  <h3>Виджет с датой и временем, обяхательными для заполнения</h3>
+  <sci-datetime label="начала эксперимента" required id="dtre"></sci-datetime>
 
 
   <script>
@@ -175,6 +191,11 @@
     }
 
     document.getElementById("timewidget").addEventListener("change", event => {
+      console.log(event.target.value);
+    });
+
+
+    dt1.addEventListener("change", event => {
       console.log(event.target.value);
     });
   </script>

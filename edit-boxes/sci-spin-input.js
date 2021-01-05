@@ -93,11 +93,17 @@ SciSpinInput.templateText = `
 <style>
     @import url(../core-styles.css);
     
+    :host{
+        font-size: 0;
+        width: 265px;
+    }
+    
     sci-input{
         display: inline-block;
         vertical-align: top;
-        margin: 0;
-        width: 250px;
+        margin: 0 5px 0 0;
+        width: calc(100% - 15px);
+        font-size: 14px;
     }
     
     .spin-buttons{
@@ -106,6 +112,7 @@ SciSpinInput.templateText = `
         margin-top: 18px;
         width: 10px;
         height: 22px;
+        font-size: 14px;
     }
     
     .spin-button{
