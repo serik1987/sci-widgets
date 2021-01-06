@@ -20,6 +20,7 @@
   <script src="edit-boxes/sci-spin-input.js" defer></script>
   <script src="datetime/sci-time.js" defer></script>
   <script src="datetime/sci-datetime.js" defer></script>
+  <script src="datetime/sci-datetime-range.js" defer></script>
 
   <style>
     body{
@@ -156,6 +157,29 @@
   <h3>Виджет с датой и временем, обяхательными для заполнения</h3>
   <sci-datetime label="начала эксперимента" required id="dtre"></sci-datetime>
 
+  <h2>Диапазон дат и времен</h2>
+  <sci-datetime-range label="эксперимента" id="range_1"></sci-datetime-range>
+  <sci-datetime-range label="эксперимента" start-value="2011-03-11 9:00" finish-value="2011-03-15 21:00"
+                      id="range_2"></sci-datetime-range>
+
+  <h3>Диапазон дат неактивен</h3>
+  <sci-datetime-range label="эксперимента" disabled id="range_disabled"></sci-datetime-range>
+
+  <h3>Встроенный календарь</h3>
+  <sci-datetime-range label="эксперимента" inline id="range_inline"></sci-datetime-range>
+  <sci-datetime-range label="эксперимента" inline disabled id="range_inline_disabled"></sci-datetime-range>
+
+  <h3>Календарь с секундами и миллисекундами</h3>
+  <sci-datetime-range label="эксперимента" seconds id="range_seconds"></sci-datetime-range>
+  <sci-datetime-range label="эксперимента" seconds millis id="range_millis"></sci-datetime-range>
+
+  <h3>Календарь, обязательный для заполнения</h3>
+  <sci-datetime-range label="эксперимерта" required id="range_required"></sci-datetime-range>
+
+  <h3>Календарь с минимальным и максимальным значениями</h3>
+  <sci-datetime-range label="эксперимента" minvalue="2020-01-01 00:00" maxvalue="2020-12-31 23:59" id="range_r">
+  </sci-datetime-range>
+
 
   <script>
 
@@ -197,6 +221,11 @@
 
     dt1.addEventListener("change", event => {
       console.log(event.target.value);
+    });
+
+    document.querySelector("#range_1").addEventListener("change", event => {
+      console.log(event.target.startValue);
+      console.log(event.target.finishValue);
     });
   </script>
 

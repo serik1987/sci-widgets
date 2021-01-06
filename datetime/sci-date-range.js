@@ -241,10 +241,36 @@ class SciDateRange extends SciWidget{
     }
 
     get value(){
-        return {
-            start: this.startValue,
-            finish: this.finishValue
+        let value = {};
+        let failed = false;
+
+        try{
+            value.start = this.startValue;
+        } catch (e){
+            if (e instanceof TypeError){
+                value.start = null;
+                failed = true;
+            } else {
+                throw e;
+            }
         }
+
+        try{
+            value.finish = this.finishValue;
+        } catch (e){
+            if (e instanceof TypeError){
+                value.finish = null;
+                failed = true;
+            } else {
+                throw e;
+            }
+        }
+
+        if (failed){
+            throw new TypeError("sci-date-range: the user did not filled all the fields");
+        }
+
+        return value;
     }
 
     set value(value){
