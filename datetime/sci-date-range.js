@@ -279,7 +279,7 @@ class SciDateRange extends SciWidget{
     }
 }
 
-SciDateRange.observedAttributes = ["disabled", "finish-label", "inline", "label", "maxvalue", "minvalue"];
+SciDateRange.observedAttributes = ["disabled", "finish-label", "inline", "label", "maxvalue", "minvalue", "width"];
 
 SciDateRange.template = null;
 

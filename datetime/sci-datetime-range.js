@@ -358,7 +358,8 @@ class SciDatetimeRange extends SciWidget{
 
 }
 
-SciDatetimeRange.observedAttributes = ["disabled", "inline", "label", "maxvalue", "millis", "minvalue", "seconds"];
+SciDatetimeRange.observedAttributes = ["disabled", "inline", "label", "maxvalue", "millis", "minvalue", "seconds",
+    "width"];
 
 SciDatetimeRange.template = null;
 

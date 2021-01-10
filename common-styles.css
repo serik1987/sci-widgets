@@ -1,3 +1,6 @@
+@import url(fonts/stylesheet.css);
+
+
 body{
     font-family: 'Futura PT', 'Helvetica Neue', Helvetica, Arial, Sans-serif, serif;
     font-size: 14px;
@@ -65,4 +68,49 @@ blockquote{
 .buttons-wrapper{
     text-align: center;
     font-size: 0;
+}
+
+
+/* Styles for list boxes and combo items */
+
+sci-combo-box ul{
+    margin: 0;
+    padding: 5px;
+    list-style-type: none;
+    color: rgb(186, 196, 209);
+}
+
+sci-combo-box li{
+    cursor: pointer;
+}
+
+sci-combo-box li:hover{
+    color: #1758da;
+}
+
+sci-combo-box li.optional{
+    font-style: italic;
+}
+
+sci-combo-box.complex-list ul{
+    padding: 0;
+}
+
+sci-combo-box.complex-list li{
+    padding: 5px;
+    border-bottom: 1px solid #333;
+    color: #333;
+}
+
+sci-combo-box.complex-list li p:nth-child(2){
+    font-style: italic;
+}
+
+sci-combo-box.complex-list li:last-child{
+    border-bottom: none;
+}
+
+sci-combo-box li.disabled{
+    color: rgb(186, 196, 209);
+    cursor: default;
 }

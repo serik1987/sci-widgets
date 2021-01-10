@@ -550,7 +550,7 @@ class SciTime extends SciSpinInput{
 
 }
 
-SciTime.observedAttributes = ["disabled", "hours", "label", "maxvalue", "millis", "minvalue", "seconds"];
+SciTime.observedAttributes = ["disabled", "hours", "label", "maxvalue", "millis", "minvalue", "seconds", "width"];
 
 SciTime.timestamp = function(time){
     let timestamp = null;

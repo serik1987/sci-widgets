@@ -317,7 +317,7 @@ class SciDatetime extends SciWidget{
 
 }
 
-SciDatetime.observedAttributes = ["disabled", "inline", "label", "maxvalue", "millis", "minvalue", "seconds"];
+SciDatetime.observedAttributes = ["disabled", "inline", "label", "maxvalue", "millis", "minvalue", "seconds", "width"];
 
 SciDatetime.template = null;
 
