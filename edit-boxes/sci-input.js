@@ -19,27 +19,23 @@ class SciInput extends SciEditor{
 
         let input = shadow.querySelector("input");
         let self = this;
+        let livesearch = this.getAttribute("livesearch") !== null;
+        this.__input = input;
+
+        this.ready = true;
+        this.readyFunc = () => this.ready;
+        this.updateFunc = null;
+        this.checkFunc = value => value === this.__updateValue;
+
 
         input.addEventListener("input", event => {
             event.stopPropagation();
-            if (self.__oldValue === null){
-                self.__oldValue = this.defaultValue;
+
+            self.__applyCheckers();
+            if (livesearch){
+                self.__livesearch();
             }
-            let newValue = input.value;
-            let checkerResult = true;
-            let keys = Reflect.ownKeys(this.__checkers);
-            for (let key of keys){
-                if (typeof key === "symbol"){
-                    let checker = this.__checkers[key];
-                    checkerResult = checkerResult && checker(this.__oldValue, newValue);
-                }
-            }
-            if (!checkerResult){
-                input.value = this.__oldValue;
-            } else {
-                input.value = newValue;
-                this.__oldValue = newValue;
-            }
+
             let newEvent = new InputEvent(event.type, event);
             self.dispatchEvent(newEvent);
         });
@@ -49,6 +45,45 @@ class SciInput extends SciEditor{
             let newEvent = new Event("change", event);
             self.dispatchEvent(newEvent);
         });
+    }
+
+    __applyCheckers(){
+        if (this.__oldValue === null){
+            this.__oldValue = this.defaultValue;
+        }
+        let newValue = this.__input.value;
+        let checkerResult = true;
+        let keys = Reflect.ownKeys(this.__checkers);
+        for (let key of keys){
+            if (typeof key === "symbol"){
+                let checker = this.__checkers[key];
+                checkerResult = checkerResult && checker(this.__oldValue, newValue);
+            }
+        }
+        if (!checkerResult){
+            this.__input.value = this.__oldValue;
+        } else {
+            this.__input.value = newValue;
+            this.__oldValue = newValue;
+        }
+    }
+
+    __livesearch(){
+        let self = this;
+        let value = this.__input.value;
+        if (typeof this.updateFunc !== "function"){
+            throw new TypeError("sci-input: livesearch attribute is set but not function is assigned to updateFunc " +
+                "attribute");
+        }
+        if (this.readyFunc()){
+            this.__updateValue = value;
+            this.updateFunc.call(this, value)
+                .then(() => {
+                    if (!self.checkFunc.call(self, self.__input.value)){
+                        self.__livesearch();
+                    }
+                });
+        }
     }
 
     attributeChangedCallback(name, oldValue, newValue){

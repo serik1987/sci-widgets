@@ -12,10 +12,8 @@
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
-  <script src="sci-expandable-widget.js" defer></script>
-  <script src="lists/sci-item.js" defer></script>
-  <script src="lists/sci-item-list.js" defer></script>
-  <script src="lists/sci-combo-box.js" defer></script>
+  <script src="edit-boxes/sci-editor.js" defer></script>
+  <script src="edit-boxes/sci-input.js" defer></script>
 
   <style>
     body{
@@ -37,6 +35,11 @@
         margin: 5px;
       }
     }
+
+    .output{
+      font: 18px "Courier New";
+    }
+
   </style>
 </head>
 
@@ -44,165 +47,38 @@
 
   <div class="ruler"></div>
 
-  <h1>Демонстрация работы sci-combo-box</h1>
+  <h1>Демонстрация "Живого поиска"</h1>
 
-  <h2>Обычный sci-combo-box</h2>
+  <h2>Низший уровень реализации</h2>
 
-  <sci-combo-box label="Опция" id="cbs1">
-    <ul>
-      <li data-value="value1">Значение 1</li>
-      <li data-value="value2">Значение 2</li>
-      <li data-value="value3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
+  <sci-input label="Поиск" livesearch id="simple-livesearch"></sci-input>
 
-  <sci-combo-box label="Опция" id="cbs2" value="value1">
-    <ul>
-      <li data-value="value1">Значение 1</li>
-      <li data-value="value2">Значение 2</li>
-      <li data-value="value3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>Хитрый sci-combo-box</h2>
-
-  <sci-combo-box label="Изолиния" id="cb1" required>
-    <ul>
-      <li data-value="none" class="optional">Нет</li>
-      <li data-value="linear-regression">Линейная регрессия</li>
-      <li data-value="time-average">
-        <p>Скользящее среднее</p>
-        <p>Период усреднения 1 мс</p>
-      </li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>sci-combo-box со значением по-умолчанию</h2>
-
-  <sci-combo-box label="Изолиния" value="time-average" id="cb2">
-    <ul>
-      <li data-value="none" class="optional">Нет</li>
-      <li data-value="linear-regression">Линейная регрессия</li>
-      <li data-value="time-average">
-        <p>Скользящее среднее</p>
-        <p>Период усреднения 1 мс</p>
-      </li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>sci-combo-box c возможностью отмены изначального выбора</h2>
-
-  <sci-combo-box label="Изолиния" prevent-default id="cb3">
-    <ul>
-      <li data-value="none" class="optional">Нет</li>
-      <li data-value="linear-regression">Линейная регрессия</li>
-      <li data-value="time-average">
-        <p>Скользящее среднее</p>
-        <p>Период усреднения 1 мс</p>
-      </li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>Неактивный sci-combo-box</h2>
-
-  <sci-combo-box label="Опция" disabled id="cbd1">
-    <ul>
-      <li data-value="x1">Значение 1</li>
-      <li data-value="x2">Значение 2</li>
-      <li data-value="x3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <sci-combo-box label="Опция" disabled value="x1" id="cbd2">
-    <ul>
-      <li data-value="x1">Значение 1</li>
-      <li data-value="x2">Значение 2</li>
-      <li data-value="x3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>Виджет с фиксированной шириной</h2>
-  <sci-combo-box label="Опция" id="cbw" width="250">
-    <ul>
-      <li data-value="x1">Значение 1</li>
-      <li data-value="x2">Значение 2</li>
-      <li data-value="x3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>Встроенный раскрывающийся список</h2>
-
-  <sci-combo-box label="Опция" id="cbi" inline>
-    <ul>
-      <li data-value="x1">Значение 1</li>
-      <li data-value="x2">Значение 2</li>
-      <li data-value="x3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <h2>Список с выключенным элементом</h2>
-  <sci-combo-box label="Опция">
-    <ul>
-      <li data-value="x1">Значение 1</li>
-      <li data-value="x2" class="disabled">Значение 2</li>
-      <li data-value="x3">Значение 3</li>
-    </ul>
-  </sci-combo-box>
-
-  <sci-combo-box label="Изолиния" id="cb3">
-    <ul>
-      <li data-value="none" class="optional">Нет</li>
-      <li data-value="linear-regression" class="disabled">Линейная регрессия</li>
-      <li data-value="time-average">
-        <p>Скользящее среднее</p>
-        <p>Период усреднения 1 мс</p>
-      </li>
-    </ul>
-  </sci-combo-box>
+  <p class="output"></p>
 
   <script>
-    for (let id of ["#cb1", "#cbs1"]){
-      document.querySelector(id).addEventListener("change", event => {
-        console.log(event.target);
-        console.log(event.target.value);
-      });
+    let simple = document.querySelector("#simple-livesearch");
+    let output = document.querySelector(".output");
 
-      document.querySelector(id).addEventListener("sci-open", event => {
-        console.log(event.target);
-        console.log("opened");
-      });
-
-      document.querySelector(id).addEventListener("sci-close", event => {
-        console.log(event.target);
-        console.log("closed");
-      });
-
-      window.onload = function(event) {
-        for (let item of document.querySelector("#cbs1").items) {
-          item.element.addEventListener("click", event => {
-            console.log("========= ITEM CLICK ===================");
-            console.log(event.target.dataset.value);
-            console.log("========================================");
-          });
-        }
-
-        let cbi = document.querySelector("#cbi");
-
-        let element1 = SciSimpleItem.create("x4", "Значение 4");
-        cbi.items.add(element1);
-
-        let element2 = SciOptionalItem.create("x5", "Значение 5");
-        cbi.items.add(element2, 1);
-
-        let element3 = SciDoubleItem.create("x6", "Значение 6", "Описание значения 6");
-        cbi.items.add(element3, element1);
-
-        cbi.value = "x1";
-
-        cbi.items.remove(0);
-        cbi.items.remove(cbi.items.x2);
-
-        cbi.items.sort();
+    window.onload = function(){
+      simple.updateFunc = function(value){
+        let self = this;
+        return new Promise((resolve, reject) => {
+          self.ready = false;
+          if (value.length === 0){
+            output.innerText = "";
+            self.ready = true;
+            resolve();
+          }
+          for (let i=1; i <= value.length; ++i){
+            setTimeout(() => {
+              output.innerText = value.substr(0, i);
+              if (i === value.length){
+                self.ready = true;
+                resolve();
+              }
+            }, 500*i);
+          }
+        });
       }
     }
   </script>
