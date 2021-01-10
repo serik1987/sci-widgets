@@ -12,15 +12,6 @@
   <link rel="stylesheet" href="common-styles.css"/>
   <script src="sci-widget.js" defer></script>
   <script src="constants.js" defer></script>
-  <script src="edit-boxes/sci-editor.js" defer></script>
-  <script src="edit-boxes/sci-input.js" defer></script>
-  <script src="sci-expandable-widget.js" defer></script>
-  <script src="datetime/sci-date.js" defer></script>
-  <script src="datetime/sci-date-range.js" defer></script>
-  <script src="edit-boxes/sci-spin-input.js" defer></script>
-  <script src="datetime/sci-time.js" defer></script>
-  <script src="datetime/sci-datetime.js" defer></script>
-  <script src="datetime/sci-datetime-range.js" defer></script>
 
   <style>
     body{
@@ -49,185 +40,46 @@
 
   <div class="ruler"></div>
 
-  <h1>Демонстрация работы календаря</h1>
-  <h2>Одиночные календари для дат</h2>
-  <h3>Простой календарь, обязателен для заполнения</h3>
+  <h1>Демонстрация работы sci-combo-box</h1>
 
-  <sci-date label="Дата начала эксперимента" id="simple" required></sci-date>
-  <p>Текст после календаря</p>
+  <h2>Обычный sci-combo-box</h2>
 
-  <h3>Пример деактивированного календаря</h3>
-  <sci-date label="Дата подачи заявки на эксперимент" id="disabled" disabled></sci-date>
+  <sci-combo-box label="Изолиния" id="cb1">
+    <ul>
+      <li data-value="none" class="optional">Нет</li>
+      <li data-value="linear-regression">Линейная регрессия</li>
+      <li data-value="time-average">
+        <p>Скользящее среднее</p>
+        <p>Период усреднения 1 мс</p>
+      </li>
+    </ul>
+  </sci-combo-box>
 
-  <h3>Календарь, ограниченный по ширине</h3>
-  <sci-date label="Дата поездки" id="small" width="400"></sci-date>
+  <h2>sci-combo-box со значением по-умолчанию</h2>
 
-  <h3>Календарь с датой, заданной по-умолчанию</h3>
-  <sci-date label="Дата рождения" id="defdate" value="1987-04-21"></sci-date>
+  <sci-combo-box label="Изолиния" value="time-average" id="cb2">
+    <ul>
+      <li data-value="none" class="optional">Нет</li>
+      <li data-value="linear-regression">Линейная регрессия</li>
+      <li data-value="time-average">
+        <p>Скользящее среднее</p>
+        <p>Период усреднения 1 мс</p>
+      </li>
+    </ul>
+  </sci-combo-box>
 
-  <h3>Нераскрывающийся календарь</h3>
-  <sci-date label="Дата начала регистрации" id="inline_date" inline></sci-date>
+  <h2>sci-combo-box c возможностью отмены изначального выбора</h2>
 
-  <h3>Нераскрывающийся неактивный календарь</h3>
-  <sci-date label="Дата окончания регистрации" id="inline_disabled" inline disabled></sci-date>
-
-  <h3>Нераскрывающийся активный календарь с обязательным указаниеем даты</h3>
-  <sci-date label="Дата введения пропофола" id="inline_required" inline required></sci-date>
-
-  <h3>Календарь с предельно допустимыми минимальным и максимальным значениями</h3>
-  <sci-date label="Дата подачи заявки" id="restricted" minvalue="2020-08-15" maxvalue="2020-11-10"></sci-date>
-
-  <h2>Диапазоны дат</h2>
-  <h3>Простой диапазон дат</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="simple_range"></sci-date-range>
-
-  <h3>Диапазон дат в вертикальным расположением</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" in-block></sci-date-range>
-
-  <h3>Диапазон дат с дефолтными значениями</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="def_range"
-                  start-value="2010-08-01" finish-value="2010-08-29"></sci-date-range>
-
-  <h3>Нераскрывающийся диапазон дат</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inline_range" inline>
-  </sci-date-range>
-
-  <h3>Диапазон дат с максимальным и минимальным значениями</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="restricted_range"
-    minvalue="2010-01-01" maxvalue="2010-12-31"></sci-date-range>
-
-  <h3>Диапазон дат с требованием заполнить его полностью</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="travel_range" required>
-  </sci-date-range>
-
-  <h3>Диапазон дат неактивен</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inactive_range" disabled>
-  </sci-date-range>
-
-  <h3>Встроенный диапазон дат неактивен</h3>
-  <sci-date-range label="Дата начала поездки" finish-label="Дата окончания поездки" id="inline_disabled_range"
-                  inline disabled></sci-date-range>
-
-  <h3>Выбор времени</h3>
-  <sci-time label="Время начала эксперимента" id="timewidget"></sci-time>
-
-  <h3>Выбор времени с дефолтным указанием самого времени</h3>
-  <sci-time label="Время начала эксперимента" value="9:03" id="deftime1"></sci-time>
-  <sci-time label="Время начала эксперимента" value="9:03:48" id="deftime2"></sci-time>
-  <sci-time label="Время начала эксперимента" value="9:03:48.356" id="deftime3"></sci-time>
-
-  <h3>Поддержка времени в секундах</h3>
-  <sci-time label="Время начала эксперимента" seconds id="timeseconds1"></sci-time>
-  <sci-time label="Время начала эксперимента" value="9:03:48" seconds id="timeseconds2"></sci-time>
-
-  <h3>Отображение миллисекунд</h3>
-  <sci-time label="Время начала эксперимента" seconds millis id="millis1"></sci-time>
-  <sci-time label="Время начала эксперимента" value="9:03:48.356" seconds millis id="millis2"></sci-time>
-
-  <h3>Относительное время без указания часов</h3>
-  <sci-time label="Длительность эксперимента" relative id="r1"></sci-time>
-  <sci-time label="Длительность эксперимента" relative millis id="r2" value="12:03.308"></sci-time>
-
-  <h3>Относительное время с часами</h3>
-  <sci-time label="Длительность эксперимента" hours relative required id="hr1"></sci-time>
-  <sci-time label="Длительность эксперимента" hours relative id="hr2" value="2:00:00"></sci-time>
-  <sci-time label="Длительность эксперимента" hours relative millis id="hr3" value="12:03.308"></sci-time>
-
-  <h3>Время с указанием границ диапазона</h3>
-  <sci-time label="Время начала эксперимента" minvalue="9:00" maxvalue="23:00" id="rt1"></sci-time>
-  <sci-time label="Время начала эксперимента" minvalue="9:00" maxvalue="23:00" value="7:00" id="rt2"></sci-time>
-
-  <h3>Время деактивировано</h3>
-  <sci-time label="Время окончания экперимента" value="23:00" id="td" disabled></sci-time>
-
-  <h2>Дата и время</h2>
-  <sci-datetime label="начала эксперимента" id="dt1"></sci-datetime>
-  <sci-datetime label="окончания эксперимента" value="2010-03-11 9:03" id="dt2"></sci-datetime>
-  <sci-datetime label="регистрации" seconds millis id="dt3"></sci-datetime>
-
-  <h3>Неактивный виджет</h3>
-  <sci-datetime label="начала эксперимента" disabled id="dtd"></sci-datetime>
-
-  <h3>Встроенный виджет</h3>
-  <sci-datetime label="начала эксперимента" inline></sci-datetime>
-
-  <h3>Виджет с минимальной и максимальной датами</h3>
-  <sci-datetime label="начала эксперимента" minvalue="2011-03-11 9:00" maxvalue="2011-03-15 21:00" id="dtr"></sci-datetime>
-
-  <h3>Виджет с датой и временем, обяхательными для заполнения</h3>
-  <sci-datetime label="начала эксперимента" required id="dtre"></sci-datetime>
-
-  <h2>Диапазон дат и времен</h2>
-  <sci-datetime-range label="эксперимента" id="range_1"></sci-datetime-range>
-  <sci-datetime-range label="эксперимента" start-value="2011-03-11 9:00" finish-value="2011-03-15 21:00"
-                      id="range_2"></sci-datetime-range>
-
-  <h3>Диапазон дат неактивен</h3>
-  <sci-datetime-range label="эксперимента" disabled id="range_disabled"></sci-datetime-range>
-
-  <h3>Встроенный календарь</h3>
-  <sci-datetime-range label="эксперимента" inline id="range_inline"></sci-datetime-range>
-  <sci-datetime-range label="эксперимента" inline disabled id="range_inline_disabled"></sci-datetime-range>
-
-  <h3>Календарь с секундами и миллисекундами</h3>
-  <sci-datetime-range label="эксперимента" seconds id="range_seconds"></sci-datetime-range>
-  <sci-datetime-range label="эксперимента" seconds millis id="range_millis"></sci-datetime-range>
-
-  <h3>Календарь, обязательный для заполнения</h3>
-  <sci-datetime-range label="эксперимерта" required id="range_required"></sci-datetime-range>
-
-  <h3>Календарь с минимальным и максимальным значениями</h3>
-  <sci-datetime-range label="эксперимента" minvalue="2020-01-01 00:00" maxvalue="2020-12-31 23:59" id="range_r">
-  </sci-datetime-range>
-
-
-  <script>
-
-    document.body.addEventListener("sci-open", event => {
-      console.log("sci open");
-      console.log(event.target);
-    });
-
-    document.body.addEventListener("sci-close", event => {
-        console.log("sci close");
-        console.log(event.target);
-    });
-
-    document.querySelector("#simple").addEventListener("change", event => {
-        console.log("changed");
-        console.log(event.target.value);
-    });
-
-    document.getElementById("simple_range").addEventListener("change", event => {
-        console.log("changed");
-        console.log(event.target.startValue);
-        console.log(event.target.finishValue);
-    });
-
-    for (let widget of ["timewidget", "timeseconds1", "millis1", "hr1", "r1", "rt1"]){
-      let element = document.getElementById(widget);
-      element.addEventListener("sci-overspin-up", event => {
-        console.log("overspin up");
-      });
-      element.addEventListener("sci-overspin-down", event => {
-        console.log("overspin down");
-      });
-    }
-
-    document.getElementById("timewidget").addEventListener("change", event => {
-      console.log(event.target.value);
-    });
-
-
-    dt1.addEventListener("change", event => {
-      console.log(event.target.value);
-    });
-
-    document.querySelector("#range_1").addEventListener("change", event => {
-      console.log(event.target.startValue);
-      console.log(event.target.finishValue);
-    });
-  </script>
+  <sci-combo-box label="Изолиния" prevent-default id="cb3">
+    <ul>
+      <li data-value="none" class="optional">Нет</li>
+      <li data-value="linear-regression">Линейная регрессия</li>
+      <li data-value="time-average">
+        <p>Скользящее среднее</p>
+        <p>Период усреднения 1 мс</p>
+      </li>
+    </ul>
+  </sci-combo-box>
 
 </body>
 

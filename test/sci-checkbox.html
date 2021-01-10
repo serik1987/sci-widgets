@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="buttons/sci-checkbox.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ruler"></div>
+
+  <h1>Демонстрация работы sci-checkbox</h1>
+
+  <sci-checkbox label="Внести в Базу данных" id="cb1"></sci-checkbox>
+  <sci-checkbox label="Сохранить в файл" checked id="cb2"></sci-checkbox>
+
+  <h2>Неактивные флажки</h2>
+
+  <sci-checkbox label="Отправить по почте" disabled id="cbd1"></sci-checkbox>
+  <sci-checkbox label="Отправить налом" disabled checked id="cbd2"></sci-checkbox>
+
+  <h2>Флажки с тремя состояниями</h2>
+
+  <sci-checkbox label="Провести Фурье-анализ" undefined id="cbu1"></sci-checkbox>
+  <sci-checkbox label="Я согласен с условиями лицензионного соглашения" undefined required id="cbu2"></sci-checkbox>
+
+  <h2>Выравнивание флажка по правому краю</h2>
+
+  <sci-checkbox label="Внести изменения" align-right id="cbr"></sci-checkbox>
+
+  <script>
+    document.querySelector("#cb1").addEventListener("change", event => {
+      console.log(event.target.value);
+    });
+  </script>
+
+</body>
+
+</html>
