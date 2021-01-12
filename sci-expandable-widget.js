@@ -24,18 +24,24 @@ class SciExpandableWidget extends SciWidget{
     _implementExpansion(){
         let self = this;
 
-        this.shadowRoot.querySelector(".hamburger").addEventListener("click", event => {
-            event.stopPropagation();
-            event.preventDefault();
+        /* All event processors were given in the same order they will be launched */
 
-            if (self.disabled){
-                return;
+        document.addEventListener("click", event => {
+            let target = event.target.closest(self.tagName);
+            if (target !== self){
+                if (self.opened){
+                    self.close();
+                    event.sci_closed_by_document = true;
+                }
             }
+        }, true);
 
-            if (!event.sci_closed_by_document) {
-                self.opened = !self.opened;
-            }
-        });
+        let label = this.shadowRoot.querySelector("label");
+        if (label !== null){
+            label.addEventListener("click", event => {
+                self.close();
+            });
+        }
 
         this.content.addEventListener("click", event => {
             this.__quiet = true;
@@ -48,19 +54,18 @@ class SciExpandableWidget extends SciWidget{
             event.preventDefault();
         });
 
-        this.shadowRoot.querySelector("label").addEventListener("click", event => {
-            self.close();
-        });
+        this.shadowRoot.querySelector(".hamburger").addEventListener("click", event => {
+            event.stopPropagation();
+            event.preventDefault();
 
-        document.addEventListener("click", event => {
-            let target = event.target.closest(self.tagName);
-            if (target !== self){
-                if (self.opened){
-                    self.close();
-                    event.sci_closed_by_document = true;
-                }
+            if (self.disabled || !self._openOnClick){
+                return;
             }
-        }, true);
+
+            if (!event.sci_closed_by_document) {
+                self.opened = !self.opened;
+            }
+        });
     }
 
     attributeChangedCallback(name, oldValue, newValue){
@@ -107,6 +112,10 @@ class SciExpandableWidget extends SciWidget{
 
     _disableChildren(){
         this.close();
+    }
+
+    get _openOnClick(){
+        return true;
     }
 
     get closed(){

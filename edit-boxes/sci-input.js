@@ -70,6 +70,7 @@ class SciInput extends SciEditor{
 
     __livesearch(){
         let self = this;
+        this.errorMessage = "";
         let value = this.__input.value;
         if (typeof this.updateFunc !== "function"){
             throw new TypeError("sci-input: livesearch attribute is set but not function is assigned to updateFunc " +
@@ -79,6 +80,12 @@ class SciInput extends SciEditor{
             this.__updateValue = value;
             this.updateFunc.call(this, value)
                 .then(() => {
+                    if (!self.checkFunc.call(self, self.__input.value)){
+                        self.__livesearch();
+                    }
+                })
+                .catch(e => {
+                    self.errorMessage = e.toString();
                     if (!self.checkFunc.call(self, self.__input.value)){
                         self.__livesearch();
                     }

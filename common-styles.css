@@ -71,46 +71,71 @@ blockquote{
 }
 
 
-/* Styles for list boxes and combo items */
+/* Styles for list boxes, combo boxes, livesearch */
 
-sci-combo-box ul{
+sci-combo-box ul, sci-livesearch ul{
     margin: 0;
     padding: 5px;
     list-style-type: none;
     color: rgb(186, 196, 209);
 }
 
-sci-combo-box li{
+sci-livesearch[inline] ul{
+    padding: 5px 0;
+}
+
+sci-combo-box li, sci-livesearch li{
     cursor: pointer;
 }
 
-sci-combo-box li:hover{
+sci-livesearch[disabled] li{
+    cursor: default;
+}
+
+sci-combo-box li:hover, sci-livesearch li:hover{
     color: #1758da;
 }
 
-sci-combo-box li.optional{
+sci-livesearch[disabled] li:hover{
+    color: rgb(186, 196, 209);
+}
+
+sci-combo-box li.optional, sci-livesearch li.optional{
     font-style: italic;
 }
 
-sci-combo-box.complex-list ul{
+sci-combo-box.complex-list ul, sci-livesearch.complex-list ul{
     padding: 0;
 }
 
-sci-combo-box.complex-list li{
+sci-livesearch[inline].complex-list ul{
+
+}
+
+sci-combo-box.complex-list li, sci-livesearch.complex-list li{
     padding: 5px;
     border-bottom: 1px solid #333;
     color: #333;
 }
 
-sci-combo-box.complex-list li p:nth-child(2){
-    font-style: italic;
-}
-
-sci-combo-box.complex-list li:last-child{
+sci-livesearch[inline].complex-list li{
+    padding: 5px 0;
     border-bottom: none;
 }
 
-sci-combo-box li.disabled{
+sci-livesearch[disabled].complex-list li{
+    color: rgb(186, 196, 209);
+}
+
+sci-combo-box.complex-list li p:nth-child(2), sci-livesearch.complex-list li p:nth-child(2){
+    font-style: italic;
+}
+
+sci-combo-box.complex-list li:last-child, sci-livesearch.complex-list li:last-child{
+    border-bottom: none;
+}
+
+sci-combo-box li.disabled, sci-livesearch li.disabled{
     color: rgb(186, 196, 209);
     cursor: default;
 }
