@@ -150,3 +150,23 @@ change callback is defined for this type of attribute`);
     _enableChildren(){}
 
 }
+
+SciWidget.PROPERTIES = {
+    scrollSpeed: 1.0
+}
+
+SciWidget.detectMobile = function(){
+        const toMatch = [
+            /Android/i,
+            /webOS/i,
+            /iPhone/i,
+            /iPad/i,
+            /iPod/i,
+            /BlackBerry/i,
+            /Windows Phone/i
+        ];
+
+        return toMatch.some((toMatchItem) => {
+            return navigator.userAgent.match(toMatchItem);
+        });
+}

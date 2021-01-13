@@ -70,7 +70,7 @@ class SciItemList{
             this.element.append(item.element);
         } else {
             let beforeIndex, beforeItem;
-            if (typeof before === "number" && before > 0 && before < this.length){
+            if (typeof before === "number" && before >= 0 && before < this.length){
                 beforeIndex = before;
                 beforeItem = this.__children[beforeIndex];
             } else if (before instanceof SciItem) {

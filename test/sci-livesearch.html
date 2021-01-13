@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="edit-boxes/sci-editor.js" defer></script>
+  <script src="edit-boxes/sci-input.js" defer></script>
+  <script src="sci-expandable-widget.js" defer></script>
+  <script src="datetime/sci-date.js" defer></script>
+  <script src="datetime/sci-date-range.js" defer></script>
+  <script src="lists/sci-item.js" defer></script>
+  <script src="lists/sci-item-list.js" defer></script>
+  <script src="lists/sci-combo-box.js" defer></script>
+  <script src="lists/sci-livesearch.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+    .output{
+      font: 18px "Courier New";
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="ruler"></div>
+
+  <h1>Демонстрация "Живого поиска"</h1>
+
+  <h2>Низший уровень реализации</h2>
+
+  <sci-input label="Поиск" livesearch id="simple-livesearch"></sci-input>
+
+  <p class="output"></p>
+
+  <h2>Высший уровень реализации</h2>
+
+  <h3>Простое поле ввода</h3>
+
+  <sci-livesearch label="Номер записи" id="complex-livesearch">
+    <ul>
+      <li data-value="item1">Элемент 1</li>
+      <li data-value="item2">Элемент 2</li>
+      <li data-value="item3">Элемент 3</li>
+    </ul>
+  </sci-livesearch>
+
+  <h3>Более сложное поле ввода</h3>
+
+  <sci-livesearch label="Метод обработки" id="complex-livesearch-more" value="average">
+    <ul>
+      <li data-value="none" class="optional">Нет</li>
+      <li data-value="linear-fit">Линейная регрессия</li>
+      <li data-value="time-average">
+        <p>Скользящее среднее</p>
+        <p>Период усреднения - 1 цикл</p>
+      </li>
+    </ul>
+  </sci-livesearch>
+
+  <h3>Живой поиск с пустым содержимым</h3>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-empty"></sci-livesearch>
+
+  <h3>Живой поиск с запретом на добавление элементов в поле ввода</h3>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-no-autofill" no-autofill></sci-livesearch>
+
+  <h3>Живой поиск деактивирован</h3>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-disabled" disabled></sci-livesearch>
+
+  <h3>Живой поиск с фиксированной шириной</h3>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-short" width="200"></sci-livesearch>
+
+  <h3>Встроенный живой поиск</h3>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-inline" inline></sci-livesearch>
+
+  <sci-livesearch label="ФИО сотрудника" id="complex-livesearch-inline-2" inline></sci-livesearch>
+
+  <sci-livesearch label="ФИО сотрудника" inline disabled>
+    <ul>
+      <li data-value="x1">item 1</li>
+      <li data-value="x2">item 2</li>
+      <li data-value="x3">item 3</li>
+    </ul>
+  </sci-livesearch>
+
+  <sci-livesearch label="ФИО сотрудника" inline disabled>
+    <ul>
+      <li data-value="x1">Basic item</li>
+      <li data-value="x2" class="optional">Optional item</li>
+      <li data-value="x3">
+        <p>Double item</p>
+        <p>Description for the double item</p>
+      </li>
+    </ul>
+  </sci-livesearch>
+
+  <h3>Живой поиск с плейсхолдером</h3>
+
+  <sci-livesearch label="ФИО сотрудника" placeholder="Выберите нужного сотрудника из списка" id="placeholder">
+  </sci-livesearch>
+
+  <h3>Живой поиск с валидатором</h3>
+  <sci-livesearch label="Название кошки" id="val" required></sci-livesearch>
+
+  <h2>Демонстрация других объектов класса SciExpandableWidget</h2>
+
+  <p>Она необходима нам для того, чтобы понять, что мы изменили класс SciExpandableWidget, а сами элементы при
+  этом не поменялись</p>
+
+  <sci-date label="Дата начала регистрации"></sci-date>
+  <sci-date label="Неактивная дата" disabled></sci-date>
+
+  <sci-date-range label="Дата начала регистрации" finish-label="Дата окончания регистрации"></sci-date-range>
+
+  <sci-combo-box label="Опция">
+    <ul>
+      <li data-value="value1">Значение 1</li>
+      <li data-value="value2">Значение 2</li>
+      <li data-value="value3">Значение 3</li>
+    </ul>
+  </sci-combo-box>
+
+  <script>
+    let simple = document.querySelector("#simple-livesearch");
+    let output = document.querySelector(".output");
+    let complex = document.querySelector("#complex-livesearch");
+    let complex2 = document.querySelector("#complex-livesearch-more");
+    let complex3 = document.querySelector("#complex-livesearch-empty");
+    let complex4 = document.querySelector("#complex-livesearch-no-autofill");
+    let complexDisabled = document.querySelector("#complex-livesearch-disabled");
+    let complexShort = document.querySelector("#complex-livesearch-short");
+    let complexInline = document.querySelector("#complex-livesearch-inline");
+    let complexInline2 = document.querySelector("#complex-livesearch-inline-2");
+    let complexPlaceholder = document.querySelector("#placeholder");
+    let complexValidator = document.querySelector("#val");
+
+    window.onload = function(){
+      simple.updateFunc = function(value){
+        let self = this;
+        return new Promise((resolve, reject) => {
+          self.ready = false;
+          if (value.length === 0){
+            output.innerText = "";
+            self.ready = true;
+            resolve();
+          }
+          for (let i=1; i <= value.length; ++i){
+            setTimeout(() => {
+              output.innerText = value.substr(0, i);
+              if (i === value.length){
+                self.ready = true;
+                resolve();
+              }
+            }, 500*i);
+          }
+        });
+      }
+
+
+
+      complex.onUpdate = function(value){
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (value.length > 20){
+              reject("Вы ввели слишком большое значение");
+            } else {
+              resolve([
+                {
+                  value: "id1",
+                  text: "Основная опция"
+                },
+                {
+                  value: "id2",
+                  text: "Дополнительная опция",
+                  optional: true
+                },
+                {
+                  value: "id3",
+                  text: value,
+                  description: "Опция с пристрастием"
+                }
+              ]);
+            }
+          }, 5000);
+        });
+      }
+
+      complex2.onUpdate = function(value){
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let element = document.createElement("ul");
+            let items = new SciItemList(complex2, element);
+            if (value === "synchronization"){
+              items.add(SciSimpleItem.create("no", "No synchronization"));
+              items.add(SciSimpleItem.create("interframe", "Interframe time"));
+              items.add(SciSimpleItem.create("interstimulus", "Interstimulus time"));
+              items.add(SciSimpleItem.create("external", "External synchronization"));
+            } else if (value === "average"){
+              items.add(SciOptionalItem.create("no", "No isoline"));
+              items.add(SciSimpleItem.create("linear", "Linear fit"));
+              items.add(SciDoubleItem.create("avg", "TimeAverage", "1 cycle"));
+            }
+            resolve(items);
+          }, 5000);
+        });
+      }
+
+      complex3.onUpdate = function(value){
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            complex3.innerHTML = `<ul><li>${value}</li></ul>`;
+            complex3.updateItems();
+            resolve();
+          }, 5000);
+        });
+      }
+
+
+      complex4.onUpdate = function(value){
+        return Promise.resolve([
+          {
+            value: "id1",
+            text: "Результат поиска 1"
+          },
+          {
+            value: "id2",
+            text: value
+          }
+        ]);
+      }
+
+      complexInline2.onUpdate = function(value){
+        return Promise.resolve([
+          {
+            value: "basic",
+            text: "Результат поиска 1"
+          },
+          {
+            value: "optional",
+            text: "Результат поиска 2",
+            optional: true
+          },
+          {
+            value: "double",
+            text: "Результат поиска 3",
+            description: "Введён случайно"
+          }
+        ]);
+      }
+
+      function defaultUpdate(value){
+        return Promise.resolve([
+          {
+            value: "basic",
+            text: value
+          },
+          {
+            value: "additional",
+            text: "Иное",
+            optional: true
+          }
+        ]);
+      }
+
+      for (let livesearch of [complexShort, complexInline, complexPlaceholder, complexValidator]){
+        livesearch.onUpdate = defaultUpdate;
+      }
+
+      valId = complexValidator.addValidator(/^cat-/, "Неверно введено название кошки");
+
+
+    }
+  </script>
+
+</body>
+
+</html>

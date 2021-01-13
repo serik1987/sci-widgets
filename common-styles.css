@@ -73,7 +73,7 @@ blockquote{
 
 /* Styles for list boxes, combo boxes, livesearch */
 
-sci-combo-box ul, sci-livesearch ul{
+sci-combo-box ul, sci-livesearch ul, sci-list-box ul{
     margin: 0;
     padding: 5px;
     list-style-type: none;
@@ -84,11 +84,11 @@ sci-livesearch[inline] ul{
     padding: 5px 0;
 }
 
-sci-combo-box li, sci-livesearch li{
+sci-combo-box li, sci-livesearch li, sci-list-box li{
     cursor: pointer;
 }
 
-sci-livesearch[disabled] li{
+sci-livesearch[disabled] li, sci-list-box[disabled] li{
     cursor: default;
 }
 
@@ -100,11 +100,11 @@ sci-livesearch[disabled] li:hover{
     color: rgb(186, 196, 209);
 }
 
-sci-combo-box li.optional, sci-livesearch li.optional{
+sci-combo-box li.optional, sci-livesearch li.optional, sci-list-box li.optional{
     font-style: italic;
 }
 
-sci-combo-box.complex-list ul, sci-livesearch.complex-list ul{
+sci-combo-box.complex-list ul, sci-livesearch.complex-list ul, sci-list-box.complex-list ul{
     padding: 0;
 }
 
@@ -112,7 +112,7 @@ sci-livesearch[inline].complex-list ul{
 
 }
 
-sci-combo-box.complex-list li, sci-livesearch.complex-list li{
+sci-combo-box.complex-list li, sci-livesearch.complex-list li, sci-list-box.complex-list li{
     padding: 5px;
     border-bottom: 1px solid #333;
     color: #333;
@@ -123,19 +123,65 @@ sci-livesearch[inline].complex-list li{
     border-bottom: none;
 }
 
-sci-livesearch[disabled].complex-list li{
+sci-livesearch[disabled].complex-list li, sci-list-box[disabled].complex-list li{
     color: rgb(186, 196, 209);
 }
 
-sci-combo-box.complex-list li p:nth-child(2), sci-livesearch.complex-list li p:nth-child(2){
+sci-combo-box.complex-list li p:nth-child(2), sci-livesearch.complex-list li p:nth-child(2),
+sci-list-box.complex-list p:nth-child(2){
     font-style: italic;
 }
 
-sci-combo-box.complex-list li:last-child, sci-livesearch.complex-list li:last-child{
+sci-combo-box.complex-list li:last-child, sci-livesearch.complex-list li:last-child,
+sci-list-box li:last-child{
     border-bottom: none;
 }
 
-sci-combo-box li.disabled, sci-livesearch li.disabled{
+sci-combo-box li.disabled, sci-livesearch li.disabled, sci-list-box li.disabled{
     color: rgb(186, 196, 209);
     cursor: default;
+}
+
+/* styles solely for list boxes */
+
+sci-list-box ul{
+    padding: 0;
+}
+
+sci-list-box li{
+    color: #333;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(186, 196, 209);
+    padding: 10px 5px;
+}
+
+sci-list-box.complex-list li{
+    border-bottom: 1px solid rgb(186, 196, 209);
+    padding: 10px 5px;
+}
+
+sci-list-box li p:nth-child(2){
+    text-transform: none;
+    font-style: italic;
+    line-height: 16px;
+}
+
+sci-list-box li:hover, sci-list-box li.selected{
+    background: #ddd;
+}
+
+sci-list-box li.disabled:hover{
+    background-color: #fff;
+}
+
+sci-list-box li:last-child{
+    border-bottom: none;
+}
+
+sci-list-box[disabled] li{
+    color: rgb(186, 196, 209);
+}
+
+sci-list-box[disabled] li:hover{
+    background-color: #fff;
 }
