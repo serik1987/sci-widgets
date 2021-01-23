@@ -1,0 +1,258 @@
+/* Common styles */
+
+@import url(../../core-styles.css);
+
+:host{
+    position: relative;
+    font-size: 0;
+    margin: 0;
+}
+
+.expand{
+    display: none;
+}
+
+.node-header{
+    display: inline-block;
+    position: relative;
+}
+
+.node-header .hr{
+    position: absolute;
+    left: -9px;
+    top: 9px;
+    width: 7px;
+    height: 0;
+    border-top: 1px dotted #333;
+}
+
+.mask{
+    display: none;
+}
+
+:host(:last-child) .mask{
+    display: block;
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    width: 8px;
+    bottom: 0;
+    background: #fff;
+}
+
+:host(.sci-root) .mask{
+    display: none;
+}
+
+label{
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 5px 0 0;
+    line-height: 18px;
+    color: #333;
+    font-size: 14px;
+}
+
+:host(.sci-selected) label{
+    color: #1758da;
+    cursor: default;
+}
+
+:host(.sci-non-selectable.sci-selected) label{
+    color: #333;
+}
+
+.node-header:hover label{
+    color: #1758da;
+}
+
+:host(.sci-multiple) .node-header:hover label{
+    cursor: pointer;
+}
+
+.controls{
+    display: none;
+    vertical-align: top;
+    margin-top: 4px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.controls svg{
+    width: 10px;
+    height: 10px;
+    fill: #333;
+}
+
+.node-header:hover .controls{
+    display: inline-block;
+}
+
+.controls:last-child{
+    padding-right: 0;
+}
+
+.controls:hover svg{
+    fill: #1758da;
+}
+
+.node-content{
+    position: relative;
+    padding-left: 18px;
+}
+
+.node-content .vr{
+    position: absolute;
+    left: 9px;
+    top: 2px;
+    width: 0;
+    bottom: 9px;
+    border-left: 1px dotted #333;
+}
+
+.node-content .hr{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 9px;
+    width: 7px;
+    height: 0;
+    border-top: 1px dotted #333;
+}
+
+:host(.sci-root) #btn-delete{
+    display: none;
+}
+
+
+/* Non-selectable styles */
+
+:host(.sci-non-selectable) label{
+    cursor: default;
+}
+
+:host(.sci-non-selectable) .node-header:hover label{
+    color: #333;
+}
+
+/* Expandable styles */
+
+:host(.sci-expandable) .node-header .expand{
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: -14px;
+    top: 4px;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.expand svg{
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin-top: 1px;
+    margin-left: 1px;
+    fill: #333;
+}
+
+:host(.sci-expandable.sci-empty) .node-header .expand{
+    display: none;
+}
+
+:host(.sci-expandable) .node-header .expand #btn-plus{
+    display: none;
+}
+
+:host(.sci-expandable) .node-header .expand #btn-minus{
+    display: block;
+}
+
+:host(.sci-expandable.sci-compact) .node-header .expand #btn-plus{
+    display: block;
+}
+
+:host(.sci-expandable.sci-compact) .node-header .expand #btn-minus{
+    display: none;
+}
+
+:host(.sci-expandable.sci-compact) .node-content{
+    display: none;
+}
+
+
+/* Styles for edit box */
+
+.edit-box{
+    display: none;
+}
+
+.edit-box #edit-ctrl{
+    height: 18px;
+    padding: 0;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(186, 196, 209);
+    line-height: 18px;
+}
+
+.edit-box #edit-ctrl:focus{
+    border-bottom: 1px solid #333;
+}
+
+.edit-box .controls{
+    display: inline-block;
+}
+
+:host(.sci-editable) .node-header{
+    display: none;
+}
+
+:host(.sci-editable) .edit-box{
+    display: block;
+}
+
+:host(.sci-non-editable) #btn-edit{
+    display: none;
+}
+
+
+/* Styles for delete button */
+
+:host(.sci-non-deletable) #btn-delete{
+    display: none;
+}
+
+
+/* Styles for disabled */
+
+:host(.sci-disabled) label{
+    cursor: default;
+    color: rgb(186, 196, 209);
+}
+
+:host(.sci-disabled) .node-header:hover .controls{
+    display: none;
+}
+
+
+/* No hr line, no vr line */
+
+:host(.sci-no-hr-line) .hr{
+    display: none;
+}
+
+:host(.sci-no-vr-line) .vr{
+    display: none;
+}
+
+/* Hide root */
+
+:host(.sci-root.sci-hide-root) .node-header{
+    display: none;
+}

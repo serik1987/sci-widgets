@@ -1,0 +1,28 @@
+<div class="mask"></div>
+<div class="node-header">
+    <div class="hr"></div>
+    <div class="expand">
+        {{img/btn-plus.svg}}
+        {{img/btn-minus.svg}}
+    </div>
+    <label>WARNING!!! Please, define the label of your sci-tree-node</label>
+    <slot id="btn-edit" class="controls" name="btn-edit">
+        {{img/btn-edit.svg}}
+    </slot>
+    <slot id="btn-delete" class="controls" name="btn-delete" name="btn-delete">
+        {{img/btn-delete.svg}}
+    </slot>
+</div>
+<div class="edit-box">
+    <input id="edit-ctrl" />
+    <slot id="btn-ok" class="controls" name="btn-ok">
+        {{img/btn-ok.svg}}
+    </slot>
+    <slot id="btn-cancel" class="controls" name="btn-cancel">
+        {{img/btn-cancel.svg}}
+    </slot>
+</div>
+<div class="node-content">
+    <div class="vr"></div>
+    <slot id="node-content"></slot>
+</div>

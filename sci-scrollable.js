@@ -105,6 +105,9 @@ class SciScrollable extends SciWidget{
 
     updateHeight(updatePosition = true){
         let content = this.__scrollableContent;
+        if (!content){
+            throw new TypeError("You don't run the _implementScroll method after creating the DOM structure");
+        }
 
         let sH = content.scrollHeight;
         let cH = content.clientHeight;
@@ -112,7 +115,7 @@ class SciScrollable extends SciWidget{
             this.classList.add("scrollable");
             this.__restrictedHeight = true;
         }
-        if (cH >= sH && this.classList.contains("scollable")){
+        if (cH >= sH && this.classList.contains("scrollable")){
             this.classList.remove("scrollable");
             this.__restrictedHeight = false;
         }
