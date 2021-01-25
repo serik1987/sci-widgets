@@ -1,0 +1,94 @@
+@import url(../../core-styles.css);
+
+:host{
+    margin: 0;
+}
+
+.window-overlapper{
+    z-index: 100;
+}
+
+.window{
+    position: relative;
+    width: 300px;
+    height: 108px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 36px 15px;
+    box-shadow: 0 0 15px 0 #333;
+}
+
+label{
+    text-align: center;
+    color: #333;
+}
+
+.pb-line{
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #fff;
+    box-shadow: inset 0 0 10px 0 #333;
+    background: rgb(186, 196, 209);
+    overflow: hidden;
+}
+
+.pb-in-progress{
+    width: 50%;
+    height: 100%;
+    border-radius: 7px;
+    background-image: radial-gradient(ellipse closest-corner at center,
+                transparent, transparent 50%, rgba(255, 255, 255, 0.15)),
+            linear-gradient(to right, #1758da, #86bdc7);
+    box-shadow: 5px 0 5px 0 #555;
+}
+
+@keyframes pb-in-progress-undefined{
+    from{ margin-left: 0; }
+    to{margin-left: -100%;}
+}
+
+.pb-in-progress.undefined{
+    width: 200%;
+    background-image: linear-gradient(to right, #1758da 0%, #86bdc7 25%, #1758da 50%, #86bdc7 75%, #1758da 100%);
+    animation: 2s linear 0s infinite normal none running pb-in-progress-undefined;
+}
+
+
+/* inline progress bar */
+
+:host([inline]){
+    margin: 10px none;
+}
+
+:host([inline]) .window-overlapper{
+    display: block;
+    position: static;
+}
+
+:host([inline]) .window-background{
+    display: none;
+}
+
+:host([inline]) .window:before{
+    content: none;
+    display: none;
+}
+
+:host([inline]) .window{
+    display: block;
+    position: static;
+    text-align: left;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+}
+
+:host([inline]) label{
+    text-align: left;
+    margin-left: 5px;
+}
+
+:host([inline]) .pb-line{
+    width: 300px;
+}

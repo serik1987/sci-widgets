@@ -148,3 +148,49 @@ a:active, a:hover{
         margin-right: 8px;
     }
 }
+
+
+/* Progress bars and dialogs */
+
+.window-overlapper{
+    display: none;
+    position: fixed;
+    vertical-align: middle;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 0;
+    z-index: 10;
+}
+
+.window-overlapper.opened{
+    display: block;
+}
+
+.window-background{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.window-overlapper:before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.window{
+    display: inline-block;
+    vertical-align: middle;
+    background: #fff;
+    text-align: left;
+    font-size: 14px;
+}
