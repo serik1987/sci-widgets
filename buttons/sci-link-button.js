@@ -21,7 +21,7 @@ class SciLinkButton extends SciWidget{
                 return;
             }
 
-            event.stopPropagation();
+            event.stopImmediatePropagation();
             event.preventDefault();
 
             if (self.disabled || self.active){

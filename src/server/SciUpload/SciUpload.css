@@ -1,0 +1,36 @@
+@import url(../../core-styles.css);
+
+.controls{
+    display: inline-block;
+}
+
+#file-info{
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 0;
+    color: #333;
+}
+
+:host([disabled]) #file-info{
+    color: rgb(186, 196, 209);
+}
+
+#file-info.not-selected{
+    font-style: italic;
+}
+
+#load{
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+#remove{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+input{
+    display: none;
+}

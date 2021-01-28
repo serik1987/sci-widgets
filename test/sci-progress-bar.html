@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="modules/core/sci-window.js" defer></script>
+  <script src="modules/server/sci-progress-bar.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="ruler"></div>
+
+  <h1>Демонстрация элемента SciProgressBar</h1>
+
+  <p>Почти все строки прогресса скрыты. Для их отображения, пожалуйста, воспользуйтесь объектами ProgressBar и пр.</p>
+
+  <sci-progress-bar id="pb" label="Загрузка файла..."></sci-progress-bar>
+
+  <h2>Встроенные строки состояния</h2>
+
+  <sci-progress-bar id="pbi" label="Загрузка файла..." inline></sci-progress-bar>
+
+  <sci-progress-bar label="Загрузка файла..." inline disabled></sci-progress-bar>
+
+  <script>
+    let pb = document.querySelector("#pb");
+
+    pb.addEventListener("sci-window-open", event => console.log("opened"));
+    pb.addEventListener("sci-window-close", event => console.log("closed"));
+  </script>
+
+</body>
+
+</html>
