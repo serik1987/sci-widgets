@@ -10,7 +10,8 @@ CLASS_MAP = {
     "SciTreeNode": "sci-tree-node",
     "SciProgressBar": "sci-progress-bar",
     "SciWindow": "sci-window",
-    "SciUpload": "sci-upload"
+    "SciUpload": "sci-upload",
+    "SciPhotoUpload": "sci-photo-upload"
 }
 
 

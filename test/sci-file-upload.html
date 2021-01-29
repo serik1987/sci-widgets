@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="buttons/sci-link-button.js" defer></script>
+  <script src="modules/server/sci-upload.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="ruler"></div>
+
+  <h1>Демонстрация загрузки файла</h1>
+
+  <h2>Виджет без множественного выбора</h2>
+
+  <sci-upload label="Нативные карты" id="uploader"></sci-upload>
+
+  <h2>Виджет с множественным выбором</h2>
+
+  <sci-upload label="Нативные карты" id="uploader-m" multiple></sci-upload>
+
+  <h2>Неактивный виджет</h2>
+
+  <sci-upload label="Нативные карты" id="uploader-d" disabled></sci-upload>
+
+  <h2>Виджет с ограничением по ширине</h2>
+
+  <sci-upload label="Нативные карты" id="uploader-w" width="200"></sci-upload>
+
+  <h2>Виджет, который принимает только рисунки</h2>
+
+  <sci-upload label="Профиль" id="uploader-a" accept="image/*"></sci-upload>
+
+  <h2>Виджет, где файл обязательно должен быть загружен на сервер</h2>
+
+  <sci-upload label="Нативные данные" id="uploader-r" required></sci-upload>
+
+  <h2>Виджет без строки состояния</h2>
+
+  <sci-upload label="Нативные данные" id="uploader-nsb" no-status-bar></sci-upload>
+
+  <h2>Виджет без метки</h2>
+
+  <sci-upload no-label id="uploader-nl"></sci-upload>
+
+  <script>
+
+    let ud = document.getElementById("uploader-d");
+    let uw = document.getElementById("uploader-w");
+    let ur = document.getElementById("uploader-r");
+
+    ["uploader", "uploader-a", "uploader-d", "uploader-m", "uploader-r", "uploader-w", "uploader-nsb", "uploader-nl"]
+            .map(id => document.getElementById(id))
+            .forEach(uploader => {
+              uploader.addEventListener("sci-upload-start", event => {
+                console.log("Starting upload...");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.addEventListener("sci-upload-success", event => {
+                console.log("Upload success");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.addEventListener("sci-upload-failed", event => {
+                console.log("Upload failed");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.addEventListener("sci-remove-start", event => {
+                console.log("Starting remove...");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.addEventListener("sci-remove-success", event => {
+                console.log("The file was successfully removed");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.addEventListener("sci-remove-failed", event => {
+                console.log("Failure to remove the file");
+                console.log(event.target);
+                console.log(event.detail);
+              });
+
+              uploader.onUpload = function(data){
+                return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    let value = Math.random();
+                    if (value < 0.5){
+                      resolve("https://www.google.com");
+                    } else {
+                      reject("some error...");
+                    }
+                  }, 2000);
+                });
+              }
+
+              uploader.onRemove = function(data){
+                return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    let value = Math.random();
+                    if (value < 0.5){
+                      resolve();
+                    } else {
+                      reject("some error...");
+                    }
+                  }, 2000);
+                });
+              }
+            });
+
+
+
+
+  </script>
+
+</body>
+
+</html>

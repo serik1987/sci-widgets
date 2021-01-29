@@ -1,0 +1,27 @@
+@import url(../../core-styles.css);
+
+:host{
+    height: 300px;
+    width: 200px;
+}
+
+#img{
+    margin: 0 auto;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+#upload-wrapper{
+    text-align: center;
+}
+
+sci-upload{
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.error-message{
+    text-align: center;
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="buttons/sci-link-button.js" defer></script>
+  <script src="modules/server/sci-upload.js" defer></script>
+  <script src="modules/server/sci-photo-upload.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Демонстрация работы виджета sci-photo-upload</h1>
+
+  <sci-photo-upload id="uploader" placeholder="https://www.ihna.ru/ppage2/img/man-super-shape.png"></sci-photo-upload>
+
+  <h2>Пример неактивного загрузчика</h2>
+
+  <sci-photo-upload id="uploader-d" disabled placeholder="https://www.ihna.ru/ppage2/img/man-super-shape.png">
+  </sci-photo-upload>
+
+  <h2>Регулирование загрузчика по ширине</h2>
+
+  <sci-photo-upload
+          id="uploader-w"
+          width="500"
+          aspect="0.5"
+          placeholder="https://www.ihna.ru/ppage2/img/man-super-shape.png">
+  </sci-photo-upload>
+
+  <h2>Регулирование загрузчика по высоте</h2>
+
+  <sci-photo-upload
+          id="uploader-h"
+          height="500"
+          aspect="2.5"
+          placeholder="https://www.ihna.ru/ppage2/img/man-super-shape.png">
+  </sci-photo-upload>
+
+  <script>
+
+    window.onload = function(){
+      ["uploader", "uploader-d", "uploader-w", "uploader-h"]
+              .map(id => document.getElementById(id))
+              .forEach(element => {
+
+                ["sci-upload-start", "sci-upload-success", "sci-upload-failed",
+                 "sci-remove-start", "sci-remove-success", "sci-remove-failed"]
+                  .forEach(eventName => {
+                    element.addEventListener(eventName, event => {
+                      console.log(eventName);
+                      console.log(event.target);
+                      console.log(event.detail);
+                      console.log("------------------------------------");
+                    });
+                  });
+
+
+                element.onUpload = function(file){
+                  return new Promise((resolve, reject) => {
+                    setTimeout(function(){
+                      if (Math.random() < 0.5){
+                        resolve("https://www.ihna.ru/incoming/2S0plV.jpg");
+                      } else {
+                        reject("some error...");
+                      }
+                    }, 2000);
+                  });
+                }
+
+                element.onRemove = function(file){
+                  return new Promise((resolve, reject) => {
+                    setTimeout(function(){
+                      if (Math.random() < 0.5){
+                        resolve();
+                      } else {
+                        reject("some error...");
+                      }
+                    }, 2000);
+                  });
+                }
+              });
+    }
+
+  </script>
+
+</body>
+
+</html>
