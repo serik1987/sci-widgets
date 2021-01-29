@@ -1,0 +1,55 @@
+@import url(../../core-styles.css);
+
+:host{
+    cursor: pointer;
+}
+
+input{
+    display: none;
+}
+
+:host label{
+    display: block;
+    cursor: pointer;
+    vertical-align: top;
+    margin-bottom: 0;
+    margin-left: 23px;
+}
+
+#img-wrapper{
+    display: inline-block;
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    vertical-align: top;
+    border: 2px solid #1758da;
+    border-radius: 50%;
+}
+
+#img{
+    display: none;
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+    background: #1758da;
+    border-radius: 50%;
+}
+
+input[checked] + #img-wrapper #img{
+    display: block;
+}
+
+/* Disabled element */
+
+:host([disabled]), :host([disabled]) label, :host([readonly]), :host([readonly]) label{
+    cursor: default;
+}
+
+:host([disabled]) #img-wrapper{
+    border-color: rgb(186, 196, 209);
+}
+
+:host([disabled]) #img{
+    background-color: rgb(186, 196, 209);
+}

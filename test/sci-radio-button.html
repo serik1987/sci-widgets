@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="modules/buttons/sci-radio-button.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="ruler"></div>
+
+  <h1>Демонстрация работы кнопок-переключателей</h1>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no" id="sync1"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time" id="sync2"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus" id="sync3"></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external" id="sync4"></sci-radio-button>
+  </div>
+
+  <h2>Кнопка-переключатель со значением, установленным по-умолчанию</h2>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus" checked></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external"></sci-radio-button>
+  </div>
+
+  <h2>Неактивные кнопки-переключатели</h2>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus" disabled></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external"></sci-radio-button>
+  </div>
+
+  <h3>Переключатели, у которых установлен режим "только чтение"</h3>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus" readonly></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external"></sci-radio-button>
+  </div>
+
+  <h2>Настройка разной ширины для кнопок-переключателей</h2>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no" width="100"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time" width="200"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus" width="300"></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external" width="400"></sci-radio-button>
+  </div>
+
+  <h2>Группа переключателей, обязательная для заполнения</h2>
+
+  <div>
+    <sci-radio-button name="sync" label="Нет синхронизации" value="no"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазивременная синхронизация" value="quasi-time"></sci-radio-button>
+    <sci-radio-button name="sync" label="Квазистимульная синхронизация" value="quasi-stimulus"></sci-radio-button>
+    <sci-radio-button name="sync" label="Внешняя синхронизация" value="external" id="sync_r" required></sci-radio-button>
+  </div>
+
+  <script>
+
+    document.body.addEventListener("change", event => {
+      console.log("Change event...");
+      console.log(event.target);
+      console.log(event.target.value);
+    });
+
+  </script>
+
+</body>
+
+</html>

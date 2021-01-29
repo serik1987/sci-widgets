@@ -2,7 +2,6 @@
 # -*- coding: utf-8
 
 import os
-import time
 
 
 CLASS_MAP = {
@@ -11,7 +10,8 @@ CLASS_MAP = {
     "SciProgressBar": "sci-progress-bar",
     "SciWindow": "sci-window",
     "SciUpload": "sci-upload",
-    "SciPhotoUpload": "sci-photo-upload"
+    "SciPhotoUpload": "sci-photo-upload",
+    "SciRadioButton": "sci-radio-button"
 }
 
 
