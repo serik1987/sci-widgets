@@ -104,35 +104,3 @@ class SciComboBox extends SciExpandableWidget{
 }
 
 SciComboBox.observedAttributes = ["label", "opened", "width"];
-
-SciComboBox.template = null;
-
-SciComboBox.templateText = `
-<style>
-    @import url(../core-styles.css);
-    
-    :host([inline]) .hamburger{
-        border-bottom: 1px solid #333;
-    }
-    
-    :host([inline]) .hamburger svg{
-        display: block;
-    }
-    
-    :host([inline]) .hamburger .text{
-        display: block;
-    }
-    
-    :host([inline]) .content{
-        display: none;
-        position: absolute;
-        border: 1px solid #333;
-        box-shadow: 0 10px 10px -5px #aaa;
-    }
-</style>
-<div class="content">
-    <slot></slot>
-</div>
-`;
-
-customElements.define("sci-combo-box", SciComboBox);

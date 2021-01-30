@@ -54,6 +54,21 @@
     <sci-datetime name="record_start_time" label="начала записи"></sci-datetime>
     <sci-time name="check_in_desired_time" label="Желательное время чекина"></sci-time>
     <sci-datetime-range name="record_time" label="записи"></sci-datetime-range>
+    <sci-spin name="sessions" label="Количество сессий"></sci-spin>
+    <sci-combo-box name="laboratory" label="Лаборатория">
+      <ul>
+        <li data-value="1">Лаборатория физиологии сенсорных систем</li>
+        <li data-value="2">Лаборатория высшей нервной деятельности человека</li>
+        <li data-value="3">Лаборатория нейроинформатики</li>
+      </ul>
+    </sci-combo-box>
+    <sci-list-box name="simulation_region">
+      <ul>
+        <li data-value="hippo">Гиппокамп</li>
+        <li data-value="v1">Первичная зрительная кора</li>
+        <li data-value="it">Нижневисочная кора</li>
+      </ul>
+    </sci-list-box>
     <div class="buttons-wrapper">
       <sci-button type="submit" name="submit" label="Зарегистрироваться"></sci-button>
       <sci-button type="reset" name="reset" label="Закрыть"></sci-button>

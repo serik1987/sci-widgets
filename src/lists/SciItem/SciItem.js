@@ -99,7 +99,7 @@ class SciItem{
 }
 
 class SciSimpleItem extends SciItem{
-    
+
 }
 
 SciSimpleItem.create = function(value, text){

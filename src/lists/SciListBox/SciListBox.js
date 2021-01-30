@@ -205,7 +205,3 @@ class SciListBox extends SciScrollable{
 
 SciListBox.observedAttributes = ["disabled", "height", "multiple", "width"];
 
-SciListBox.template = null;
-SciListBox.templateText = "<slot></slot>";
-
-customElements.define("sci-list-box", SciListBox);

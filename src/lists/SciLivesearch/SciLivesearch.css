@@ -1,0 +1,15 @@
+@import url(../../core-styles.css);
+
+:host .hamburger{
+    border-bottom: none;
+    cursor: default;
+}
+
+:host sci-input{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+:host .content{
+    margin-top: -1px;
+}

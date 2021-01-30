@@ -350,34 +350,3 @@ class SciLivesearch extends SciExpandableWidget{
 
 SciLivesearch.observedAttributes = ["align", "disabled", "label", "placeholder", "position", "width"];
 
-SciLivesearch.template = null;
-
-SciLivesearch.templateText = `
-<style>
-    @import url(../core-styles.css);
-    
-    :host .hamburger{
-        border-bottom: none;
-        cursor: default;
-    }
-    
-    :host sci-input{
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    
-    :host .content{
-        margin-top: -1px;
-    }
-</style>
-<div class="immediate-wrapper">
-    <div class="hamburger">
-        <sci-input livesearch autocomplete="off"></sci-input>
-        <div class="content">
-            <slot></slot>
-        </div>
-    </div>
-</div>
-`;
-
-customElements.define("sci-livesearch", SciLivesearch);

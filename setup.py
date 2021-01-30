@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 
+import sys
 import os
 import shutil
 
@@ -8,7 +9,8 @@ RESULT_FILE = "sci-widgets.js"
 
 MODULES_PREINSTALL_ORDER = ["core/SciWidget", "core/SciScrollable", "core/SciExpandableWidget", "core/SciWindow",
                             "edit-boxes/SciEditor", "edit-boxes/SciInput", "edit-boxes/SciSpinInput",
-                            "datetime/SciDate", "datetime/SciTime", "datetime/SciDatetime"]
+                            "datetime/SciDate", "datetime/SciTime", "datetime/SciDatetime",
+                            "lists/SciItem", "lists/SciItemList"]
 
 MODULES_PREINSTALL = {
     "core/SciWidget": "modules/core",
@@ -20,7 +22,9 @@ MODULES_PREINSTALL = {
     "edit-boxes/SciSpinInput": "modules/edit-boxes",
     "datetime/SciDate": "modules/datetime",
     "datetime/SciTime": "modules/datetime",
-    "datetime/SciDatetime": "modules/datetime"
+    "datetime/SciDatetime": "modules/datetime",
+    "lists/SciItem": "modules/lists",
+    "lists/SciItemList": "modules/lists",
 }
 
 CLASS_MAP = {
@@ -43,11 +47,16 @@ CLASS_MAP = {
     "buttons/SciLinkButton": "sci-link-button",
     "buttons/SciLinkSwitch": "sci-link-switch",
     "datetime/SciDate": "sci-date",
-    "core/SciExpandableWidget": "sci-expandable-widget",
+    "core/SciExpandableWidget": "SciExpandableWidget",
     "datetime/SciDateRange": "sci-date-range",
     "datetime/SciDatetime": "sci-datetime",
     "datetime/SciTime": "sci-time",
-    "datetime/SciDatetimeRange": "sci-datetime-range"
+    "datetime/SciDatetimeRange": "sci-datetime-range",
+    "lists/SciComboBox": "sci-combo-box",
+    "lists/SciItemList": "SciItemList",
+    "lists/SciItem": "SciItem",
+    "lists/SciListBox": "sci-list-box",
+    "lists/SciLivesearch": "sci-livesearch"
 }
 
 
