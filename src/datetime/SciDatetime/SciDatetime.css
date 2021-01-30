@@ -1,0 +1,35 @@
+@import url(../../core-styles.css);
+
+sci-date{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+sci-time{
+    display: inline-block;
+    vertical-align: top;
+}
+
+:host([inline]) sci-time{
+    display: block;
+    width: 345px;
+}
+
+@media screen and (max-width: 700px){
+    sci-date{
+        display: block;
+        margin-right: 0;
+    }
+
+    sci-time{
+        display: block;
+        width: 345px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    sci-time{
+        width: 290px;
+    }
+}

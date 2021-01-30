@@ -141,6 +141,14 @@ change callback is defined for this type of attribute`);
         }
     }
 
+    get value(){
+        return undefined;
+    }
+
+    set value(value){
+
+    }
+
     get width(){
         return parseFloat(window.getComputedStyle(this).width);
     }

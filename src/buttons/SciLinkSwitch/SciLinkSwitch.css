@@ -1,0 +1,24 @@
+@import url(../../core-styles.css);
+
+:host{
+    font-size: 0;
+}
+
+::slotted(sci-link-button){
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+:host([position=horizontal]){
+    display: inline-block;
+}
+
+:host([position=horizontal]) ::slotted(sci-link-button){
+    display: inline-block;
+    margin-right: 5px;
+}
+
+:host([position=horizontal]) ::slotted(sci-link-button:last-child){
+    margin-right: 0;
+}

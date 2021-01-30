@@ -6,10 +6,21 @@ import shutil
 
 RESULT_FILE = "sci-widgets.js"
 
+MODULES_PREINSTALL_ORDER = ["core/SciWidget", "core/SciScrollable", "core/SciExpandableWidget", "core/SciWindow",
+                            "edit-boxes/SciEditor", "edit-boxes/SciInput", "edit-boxes/SciSpinInput",
+                            "datetime/SciDate", "datetime/SciTime", "datetime/SciDatetime"]
+
 MODULES_PREINSTALL = {
     "core/SciWidget": "modules/core",
     "core/SciScrollable": "modules/core",
-    "core/SciWindow": "modules/core"
+    "core/SciExpandableWidget": "modules/core",
+    "core/SciWindow": "modules/core",
+    "edit-boxes/SciEditor": "modules/edit-boxes",
+    "edit-boxes/SciInput": "modules/edit-boxes",
+    "edit-boxes/SciSpinInput": "modules/edit-boxes",
+    "datetime/SciDate": "modules/datetime",
+    "datetime/SciTime": "modules/datetime",
+    "datetime/SciDatetime": "modules/datetime"
 }
 
 CLASS_MAP = {
@@ -26,7 +37,17 @@ CLASS_MAP = {
     "core/SciScrollable": "SciScrollable",
     "boxes/SciForm": "sci-form",
     "edit-boxes/SciInput": "sci-input",
-    "edit-boxes/SciEditor": "sci-editor"
+    "edit-boxes/SciEditor": "sci-editor",
+    "buttons/SciButton": "sci-button",
+    "buttons/SciCheckbox": "sci-checkbox",
+    "buttons/SciLinkButton": "sci-link-button",
+    "buttons/SciLinkSwitch": "sci-link-switch",
+    "datetime/SciDate": "sci-date",
+    "core/SciExpandableWidget": "sci-expandable-widget",
+    "datetime/SciDateRange": "sci-date-range",
+    "datetime/SciDatetime": "sci-datetime",
+    "datetime/SciTime": "sci-time",
+    "datetime/SciDatetimeRange": "sci-datetime-range"
 }
 
 
@@ -86,7 +107,8 @@ if __name__ == "__main__":
     shutil.copyfile("modules/common.js", RESULT_FILE)
     f = open(RESULT_FILE, "a")
 
-    for source_name, target_path in MODULES_PREINSTALL.items():
+    for source_name in MODULES_PREINSTALL_ORDER:
+        target_path = MODULES_PREINSTALL[source_name]
         install_module(source_name, target_path)
 
     for package_dir in os.listdir("src"):

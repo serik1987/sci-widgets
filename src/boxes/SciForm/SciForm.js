@@ -43,7 +43,9 @@ class SciForm extends SciWidget{
             } catch (TypeError){
                 noErrors = false;
             }
-            value[elementName] = elementValue;
+            if (elementValue !== undefined){
+                value[elementName] = elementValue;
+            }
         }
 
         if (!noErrors){

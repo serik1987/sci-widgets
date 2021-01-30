@@ -1,0 +1,34 @@
+@import url(../../core-styles.css);
+
+sci-date{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+:host([in-block]) sci-date{
+    display: block;
+}
+
+:host([in-block]) #start-date{
+    margin-top: 20px;
+}
+
+:host([in-block]) #finish-date{
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 730px){
+    sci-date{
+        display: block;
+        margin-right: 0;
+    }
+
+    #start-date{
+        margin-top: 20px;
+    }
+
+    #finish-date{
+        margin-bottom: 20px;
+    }
+}

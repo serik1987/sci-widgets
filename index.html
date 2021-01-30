@@ -37,9 +37,27 @@
   <h1>Демонстрация работы виджета sci-form</h1>
 
   <sci-form id="form1">
+    <sci-link-button name="db_search" label="Найти в Базе данных Института"></sci-link-button>
     <sci-input name="surname" label="Фамилия"></sci-input>
     <sci-input name="name" label="Имя"></sci-input>
     <sci-input name="middle_name" label="Отчество"></sci-input>
+    <sci-checkbox name="is_employee" label="Я являюсь сотрудником Института"></sci-checkbox>
+    <sci-date name="birth_date" label="Дата рождения"></sci-date>
+    <sci-link-switch name="research_interest">
+      <sci-link-button value="experimental" label="Экспериментальное направление"></sci-link-button>
+      <sci-link-button value="theoretical" label="Теоретическое направление"></sci-link-button>
+    </sci-link-switch>
+    <sci-radio-button name="subscription" value="1year" label="Оформить подписку на один год"></sci-radio-button>
+    <sci-radio-button name="subscription" value="3year" label="Оформить подписку на три года"></sci-radio-button>
+    <sci-date-range name="experiment_date" label="Дата начала экспериментов"
+                    finish-label="Дата окончания экпериментов"></sci-date-range>
+    <sci-datetime name="record_start_time" label="начала записи"></sci-datetime>
+    <sci-time name="check_in_desired_time" label="Желательное время чекина"></sci-time>
+    <sci-datetime-range name="record_time" label="записи"></sci-datetime-range>
+    <div class="buttons-wrapper">
+      <sci-button type="submit" name="submit" label="Зарегистрироваться"></sci-button>
+      <sci-button type="reset" name="reset" label="Закрыть"></sci-button>
+    </div>
   </sci-form>
 
   <script>

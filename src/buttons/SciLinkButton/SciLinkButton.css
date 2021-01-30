@@ -1,0 +1,78 @@
+@import url(../../core-styles.css);
+
+:host{
+    cursor: pointer;
+}
+
+:host([disabled]), :host([active]){
+    cursor: default;
+}
+
+:host([disabled]) a, :host([active]) a{
+    cursor: default;
+}
+
+.immediate-wrapper{
+    display: inline-block;
+}
+
+a{
+    color: #1658da;
+}
+
+a:focus{
+    outline: none;
+}
+
+.black-theme a{
+    color: #333;
+}
+
+.gray-theme a, .gray-to-blue-theme a, .gray-to-black-theme a{
+    color: rgb(186, 196, 209);
+}
+
+.gray-to-blue-theme:hover a{
+    color: #1658da;
+}
+
+.gray-to-black-theme:hover a{
+    color: #333;
+}
+
+a:hover, a:active{
+    color: #1658da;
+}
+
+.black-theme a:hover, .black-theme a:active{
+    color: #333;
+}
+
+.gray-theme a:hover, .gray-theme a:active{
+    color: rgb(186, 196, 209);
+}
+
+.immediate-wrapper ::slotted(svg){
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+}
+
+.immediate-wrapper ::slotted(svg),
+.gray-to-blue-theme:hover ::slotted(svg){
+    fill: #1658da;
+    stroke: #1658da;
+}
+
+.black-theme ::slotted(svg),
+.gray-to-black-theme:hover ::slotted(svg){
+    fill: #333;
+    stroke: #333;
+}
+
+.gray-theme ::slotted(svg),
+.gray-to-blue-theme ::slotted(svg),
+.gray-to-black-theme ::slotted(svg){
+    fill: rgb(186, 196, 209);
+    stroke: rgb(186, 196, 209);
+}

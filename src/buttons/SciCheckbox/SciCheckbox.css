@@ -1,0 +1,66 @@
+@import url(../../core-styles.css);
+
+:host .immediate-wrapper{
+    margin-bottom: 3px;
+    font-size: 0;
+}
+
+:host([align-right]) .immediate-wrapper{
+    text-align: right;
+}
+
+input{
+    display: none;
+}
+
+.img{
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 2px solid #1658da;
+    border-radius: 4px;
+    background: #fff url(../img/checkbox.svg) 50% 50% no-repeat;
+    background-size: 100% 100%;
+}
+
+:host([align-right]) .img{
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+:host(.checked) .img{
+    background-color: #1658da;
+}
+
+:host([disabled]) .img{
+    border-color: rgb(186, 196, 209);
+    cursor: default;
+}
+
+:host(.checked[disabled]) .img{
+    background-color: rgb(186, 196, 209);
+}
+
+:host([disabled]) label{
+    cursor: default;
+}
+
+:host([undefined]) .img{
+    border-color: rgb(186, 186, 209);
+    background-color: rgb(186, 196, 209);
+}
+
+label{
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 0;
+    width: calc(100% - 23px);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+}
