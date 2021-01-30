@@ -1,0 +1,36 @@
+@import url(../../core-styles.css);
+
+:host(.align-right) input{
+    text-align: right;
+}
+
+:host(.align-center) input{
+    text-align: center;
+}
+
+:host(.align-left) input{
+    text-align: left;
+}
+
+label{
+    margin-bottom: 2px;
+}
+
+input{
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    outline: none;
+    width: 100%;
+    padding: 0px;
+    height: 21px;
+    line-height: 21px;
+}
+
+input[disabled]{
+    color: rgb(186, 196, 209);
+}
+
+input:focus{
+    border-bottom-color: #333;
+}

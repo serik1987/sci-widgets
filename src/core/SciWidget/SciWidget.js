@@ -104,6 +104,18 @@ change callback is defined for this type of attribute`);
         this.setAttribute("label", value);
     }
 
+    get name(){
+        return this.getAttribute("name");
+    }
+
+    set name(value){
+        if (value !== null){
+            this.setAttribute("name", value);
+        } else {
+            this.removeAttribute("name");
+        }
+    }
+
     get readOnly(){
         return this.getAttribute("readonly") !== null;
     }

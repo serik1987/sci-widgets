@@ -23,7 +23,10 @@ CLASS_MAP = {
     "edit-boxes/SciSpin": "sci-spin",
     "edit-boxes/SciSpinInput": "sci-spin-input",
     "core/SciWidget": "SciWidget",
-    "core/SciScrollable": "SciScrollable"
+    "core/SciScrollable": "SciScrollable",
+    "boxes/SciForm": "sci-form",
+    "edit-boxes/SciInput": "sci-input",
+    "edit-boxes/SciEditor": "sci-editor"
 }
 
 
