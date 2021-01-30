@@ -31,18 +31,23 @@ function make_dirs(dirs){
 }
 
 if (process.argv.length < 4){
-    throw new TypeError("Usage: node compile.js <class-path> <tag-name>");
+    throw new TypeError("Usage: node minify-all.js <class-path> <tag-name>");
 }
 let classPath = path.join("src", process.argv[2]);
 let className = path.basename(process.argv[2]);
 let element = process.argv[3];
 
-console.log(`Compiling ${element} with class ${classPath}`);
+console.log(`Minification of ${element} with class ${classPath}`);
 
 let output = fs.readFileSync("src/template.tpl", "utf8");
 output = output
-    .replace(/%CLASS%/g, className)
-    .replace(/%ELEMENT%/, element);
+    .replace(/%CLASS%/g, className);
+
+if (element.startsWith("sci-")){
+    output = output.replace(/%ELEMENT%/, `customElements.define("${element}", ${className});`);
+} else {
+    output = output.replace(/%ELEMENT%/, "");
+}
 
 let projectDir = __dirname;
 process.chdir(classPath);
@@ -66,6 +71,6 @@ let destinationFile = path.join(destinationPath, element + ".js");
 
 make_dirs(destinationPath);
 
-let minifiedOutput = childProcess.execSync("cat | minify --html -", {encoding: "utf8", input: output});
+let minifiedOutput = childProcess.execSync("cat | minify --js -", {encoding: "utf8", input: output});
 
 fs.writeFileSync(destinationFile, minifiedOutput, "utf8");

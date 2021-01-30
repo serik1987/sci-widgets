@@ -4,4 +4,4 @@
 <style>{{%CLASS%.css}}</style>
 {{%CLASS%.html}}
 `;
-customElements.define("%ELEMENT%", %CLASS%);
+%ELEMENT%

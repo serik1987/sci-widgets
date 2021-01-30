@@ -9,36 +9,13 @@
 1. Обычное поле ввода, которое позволяет вводить текст в одну строку
 
 ```
-<sci-input label="Имя" value="Сергей" position="left" type="text" />
-```
-
-Для подключения подобного поля ввода необходимо вписать:
-
-```
-<script src="sci-widgets/edit-boxes/sci-input.js async defer></script>
+<sci-input label="Имя" value="Сергей" position="left" type="text"></sci-input>
 ```
 
 2 Многострочное поле ввода:
 
 ```
 <sci-textarea label="Описание" value="Дефолтное описание" position="top"/>
-```
-
-Для подключения такого поля надо ввести:
-
-```
-<script src="sci-widgets/edit-boxes/sci-textarea.js async defer></script>
-```
-
-
-Для того, чтобы все три вышеперечисленных файла работали, пожалуйста, вставьте
-следующие строчки
-
-```
-<link rel="stylesheet" href="sci-widgets/common-styles.css">
-<script src="sci-widgets/sci-widget.js" async defer></script>
-<script src="sci-widgets/constants.js async defer></script>
-<script src="sci-widgets/edit-boxes/sci-editor.js" async defer></script>
 ```
 
 ## Атрибуты

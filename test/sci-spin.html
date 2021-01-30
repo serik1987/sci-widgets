@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="stylesheet" href="common-styles.css"/>
+  <script src="sci-widget.js" defer></script>
+  <script src="constants.js" defer></script>
+  <script src="edit-boxes/sci-editor.js" defer></script>
+  <script src="edit-boxes/sci-input.js" defer></script>
+  <script src="edit-boxes/sci-spin-input.js" defer></script>
+  <script src="modules/edit-boxes/sci-spin.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Демонстрация работы sci-spin</h1>
+
+  <sci-spin label="Количество пикселей" id="spin"></sci-spin>
+
+  <h2>Виджет со значением, взятым по-умолчанию</h2>
+
+  <sci-spin label="Количество пикселей" value="1000" id="spin-v"></sci-spin>
+
+  <h2>Можно произвольным образом задавать минимальное и максимальное значения, а также ступень инкремента</h2>
+
+  <sci-spin label="Ориентация стимула" min="0" max="180" step="11.25" id="spin-r"></sci-spin>
+
+  <h3>Тоже самое, только переброс значений включён</h3>
+
+  <sci-spin label="Ориентация стимула" min="0" max="168.75" step="11.25" wrap id="spin-rw"></sci-spin>
+
+  <h2>Неактивный sci-spin</h2>
+
+  <sci-spin label="Количество пикселей" id="spin-d" disabled></sci-spin>
+
+  <h2>sci-spin с заданной шириной</h2>
+
+  <sci-spin label="Количество пикселей" id="spin-w" width="200"></sci-spin>
+
+  <h2>sci-spin с плейсхоллдером</h2>
+
+  <sci-spin label="Количество пикселей" id="spin-p" min="1000" max="10000" placeholder="Введите целое число"></sci-spin>
+
+  <h2>sci-spin, только чтение</h2>
+
+  <sci-spin label="Количество пикселей" id="spin-ro" min="1000" max="10000" readonly></sci-spin>
+
+  <h2>sci-spin, обязательный для заполнения</h2>
+
+  <sci-spin label="Количество пикселей" id="spinr" min="1000" max="10000" required></sci-spin>
+
+  <h2>Выравнивание спиннера</h2>
+
+  <h3>Выравнивание влево</h3>
+
+  <sci-spin label="Количество пикселей" id="spin-al" align="left"></sci-spin>
+
+  <h3>Выравнивание по центру</h3>
+
+  <sci-spin label="Количество пикселей" id="spin-aс" align="center"></sci-spin>
+
+  <h3>Выравнивание справа</h3>
+
+  <sci-spin label="Количество пикселей" id="spin-ar" align="right"></sci-spin>
+
+  <script>
+    window.onload = function(){
+
+      ["spin", "spin-d", "spin-p", "spin-r", "spinr", "spin-v", "spin-w"]
+        .map(id => document.getElementById(id))
+        .forEach(element => {
+
+          ["sci-spin-up", "sci-spin-down", "change"]
+            .forEach(eventName => {
+              element.addEventListener(eventName, event => {
+                console.log(eventName);
+                console.log(event.target);
+                console.log(event.target.value);
+              });
+            });
+
+        });
+
+    }
+  </script>
+
+</body>
+
+</html>
