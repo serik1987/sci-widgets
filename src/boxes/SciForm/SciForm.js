@@ -1,4 +1,4 @@
-class SciForm extends SciWidget{
+class SciForm extends SciScrollable{
 
     constructor(){
         super();
@@ -11,6 +11,7 @@ class SciForm extends SciWidget{
         let content = SciForm.template.content.cloneNode(true);
         let shadow = this.attachShadow({mode: "open"});
         shadow.append(content);
+        this._implementScroll();
 
         this.__defaultValue = null;
         this.__onSubmit = null;
@@ -181,4 +182,4 @@ class SciForm extends SciWidget{
 
 }
 
-SciForm.observedAttributes = ["disabled", "width"];
+SciForm.observedAttributes = ["disabled", "padding", "width"];

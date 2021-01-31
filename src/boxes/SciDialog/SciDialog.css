@@ -1,0 +1,111 @@
+@import url(../../core-styles.css);
+
+:host .window{
+    box-sizing: border-box;
+    width: 500px;
+    border-radius: 1px;
+    box-shadow: 0px 2px 50px 10px rgba(0, 0, 0, 0.25);
+    text-align: left;
+}
+
+:host([size=tiny]) .window{
+    width: 250px;
+}
+
+:host([size=small]) .window{
+    width: 500px;
+}
+
+:host([size=large]) .window{
+    width: 1000px;
+}
+
+.window-title{
+    display: block;
+    background: #1658da;
+    margin: 0;
+    border: none;
+    position:relative;
+    height: 45px;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.window-title .title-label{
+    overflow-x: hidden;
+    margin-right: 48px;
+    text-overflow: ellipsis;
+    padding: 10px 30px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 25px;
+}
+
+.window-title .title-label:last-child{
+    margin-right: 0;
+}
+
+.window-title .close-button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 48px;
+    cursor: pointer;
+    background: url(/img/close-button.svg) 50% 50% no-repeat;
+    background-size: 40%;
+}
+
+.window-title .close-button:hover{
+    background-color: rgb(0, 52, 155)
+}
+
+sci-form{
+    padding: 30px;
+    margin: 0;
+}
+
+:host .window-overlapper .window.too-tall{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+}
+
+:host .window-overlapper .window.too-tall sci-form{
+    padding-top: 0;
+    padding-bottom: 0;
+    height: calc(100% - 45px);
+}
+
+@media screen and (max-width: 1040px){
+
+    :host([size=large]) .window{
+        width: 500px;
+    }
+
+}
+
+@media screen and (max-width: 540px){
+
+    :host([size=small]) .window, :host([size=large]) .window{
+        width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 430px){
+
+    :host .window-overlapper .window{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: auto;
+    }
+
+}

@@ -225,3 +225,12 @@ sci-list-box[disabled] li:hover{
 .col-3-4{
     width: 75%;
 }
+
+
+/* Additional styles for dialogs */
+
+@media screen and (max-width: 540px){
+    sci-dialog .buttons-wrapper sci-button{
+        margin-right: 0;
+    }
+}

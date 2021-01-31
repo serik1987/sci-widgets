@@ -5,6 +5,7 @@ class SciScrollable extends SciWidget{
 
         this.__restrictedHeight = false;
         this.__sliderMove = null;
+        this.__padding = null;
     }
 
     _createTemplate(htmlCode){
@@ -46,7 +47,7 @@ class SciScrollable extends SciWidget{
             let content = self.__scrollableContent;
             let y0 = content.scrollTop;
             let y1 = y0 + deltaY;
-            let cH = content.clientHeight;
+            let cH = self.clientHeight;
             let sH = content.scrollHeight;
 
             if (y1 < 0){
@@ -103,6 +104,38 @@ class SciScrollable extends SciWidget{
         });
     }
 
+    attributeChangedCallback(name, oldValue, newValue){
+        if (name === "padding"){
+            let content = this.shadowRoot.querySelector(".content");
+            this.__value = newValue;
+            let padding = -1;
+            if (newValue !== null){
+                padding = parseFloat(newValue);
+            }
+            if (padding > 0){
+                content.style.paddingTop = padding + "px";
+                content.style.paddingBottom = padding + "px";
+            } else {
+                content.style.paddingTop = null;
+                content.style.paddingBottom = null;
+            }
+        } else {
+            super.attributeChangedCallback(name, oldValue, newValue);
+        }
+    }
+
+    get padding(){
+        return this.__padding;
+    }
+
+    set padding(value){
+        if (value !== null){
+            this.setAttribute("padding", value);
+        } else {
+            this.removeAttribute("padding");
+        }
+    }
+
     updateHeight(updatePosition = true){
         let content = this.__scrollableContent;
         if (!content){
@@ -110,7 +143,7 @@ class SciScrollable extends SciWidget{
         }
 
         let sH = content.scrollHeight;
-        let cH = content.clientHeight;
+        let cH = this.clientHeight;
         if (cH < sH && !this.classList.contains("scrollable")){
             this.classList.add("scrollable");
             this.__restrictedHeight = true;
@@ -129,7 +162,7 @@ class SciScrollable extends SciWidget{
         if (this.classList.contains("scrollable")){
             let content = this.__scrollableContent;
 
-            let cH = content.clientHeight;
+            let cH = this.clientHeight;
             let sH = content.scrollHeight;
             let slider = this.shadowRoot.querySelector(".scroll-slider");
             let sliderHeight = Math.round(cH * cH / sH - 6);
