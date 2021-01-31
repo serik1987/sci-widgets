@@ -2,6 +2,7 @@ class SciForm extends SciWidget{
 
     constructor(){
         super();
+        let self = this;
 
         if (SciForm.template === null){
             SciForm.template = this._createTemplate(SciForm.templateText);
@@ -12,6 +13,26 @@ class SciForm extends SciWidget{
         shadow.append(content);
 
         this.__defaultValue = null;
+        this.__onSubmit = null;
+        this.__onReset = null;
+
+        this.addEventListener("click", event => {
+            if (self.disabled){
+                return;
+            }
+
+            let target = event.target;
+            if (target.classList.contains("submit") || target.name === "submit"){
+                self.submit();
+                let newEvent = new CustomEvent("sci-submit", {bubbles: true});
+                self.dispatchEvent(newEvent);
+            }
+            if (target.classList.contains("reset") || target.name === "reset"){
+                self.reset();
+                let newEvent = new CustomEvent("sci-reset", {bubbles: true});
+                self.dispatchEvent(newEvent);
+            }
+        });
     }
 
     __updateChildren(){
@@ -27,8 +48,45 @@ class SciForm extends SciWidget{
         }
     }
 
+    _enableChildren() {
+        for (let element of this.getElements()){
+            element.enable();
+        }
+    }
+
+    _disableChildren(){
+        for (let element of this.getElements()){
+            element.disable();
+        }
+    }
+
     get defaultValue(){
         return this.__defaultValue;
+    }
+
+    get onReset(){
+        return this.__onReset;
+    }
+
+    set onReset(value){
+        if (typeof value === "function" || value === null){
+            this.__onReset = value;
+            this.reset();
+        } else {
+            throw new TypeError("sci-form: bad value for onReset property");
+        }
+    }
+
+    get onSubmit(){
+        return this.__onSubmit;
+    }
+
+    set onSubmit(value){
+        if (typeof value === "function" || value === null){
+            this.__onSubmit = value;
+        } else {
+            throw new TypeError("sci-form: bad value for onSubmit property");
+        }
     }
 
     get value(){
@@ -69,11 +127,58 @@ class SciForm extends SciWidget{
     }
 
     reset(){
-        for (let element of this.getElements()){
-            element.value = null;
+        let self = this;
+        if (self.onReset === null){
+            for (let element of this.getElements()){
+                try{
+                    element.value = null;
+                } catch (e){}
+            }
+            this.__updateChildren();
+            return Promise.resolve();
+        } else {
+            return self.onReset()
+                .then(newData => {
+                    this.value = newData;
+                })
+                .catch(() => {});
+        }
+    }
+
+    submit(){
+        let self = this;
+        let data;
+        try{
+            data = self.value;
+        } catch (e){
+            if (e instanceof TypeError){
+                return;
+            } else {
+                throw e;
+            }
         }
 
-        this.__updateChildren();
+        if (typeof self.onSubmit === "function"){
+            return self.onSubmit(data)
+                .then(newData => {
+                    self.value = newData;
+                })
+                .catch(messageList => {
+                    for (let messageName in messageList){
+                        if (messageList.hasOwnProperty(messageName)){
+                            let message = messageList[messageName];
+                            let element = self.getElement(messageName);
+                            if (element !== null){
+                                element.errorMessage = message;
+                            }
+                        }
+                    }
+                });
+        } else {
+            return Promise.resolve();
+        }
     }
 
 }
+
+SciForm.observedAttributes = ["disabled", "width"];

@@ -31,7 +31,7 @@ class SciCheckbox extends SciWidget{
             if (self.disabled){
                 return;
             }
-            self.value = !self.value;
+            self.value = !self.__checkbox.checked;
             let newEvent = new Event("change", event);
             self.dispatchEvent(newEvent);
         });

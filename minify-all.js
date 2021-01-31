@@ -36,9 +36,6 @@ if (process.argv.length < 4){
 let classPath = path.join("src", process.argv[2]);
 let className = path.basename(process.argv[2]);
 let element = process.argv[3];
-if (argv.length > 4){
-    let root = argv[4];
-}
 
 console.log(`Minification of ${element} with class ${classPath}`);
 
@@ -58,7 +55,7 @@ process.chdir(classPath);
 let jsFile = loadMainFile("js");
 output = output.replace(`{{${className}.js}}`, jsFile);
 
-let cssFile = childProcess.execSync(`minify ${className}.css`, {encoding: "utf8", input: cssFileRaw});
+let cssFile = childProcess.execSync(`minify ${className}.css`, {encoding: "utf8"});
 output = output.replace(`{{${className}.css}}`, cssFile);
 
 let htmlFile = loadMainFile("html");

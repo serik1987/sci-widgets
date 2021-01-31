@@ -56,7 +56,8 @@ CLASS_MAP = {
     "lists/SciItemList": "SciItemList",
     "lists/SciItem": "SciItem",
     "lists/SciListBox": "sci-list-box",
-    "lists/SciLivesearch": "sci-livesearch"
+    "lists/SciLivesearch": "sci-livesearch",
+    "edit-boxes/SciTextArea": "sci-textarea"
 }
 
 
