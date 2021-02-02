@@ -120,11 +120,31 @@ class SciForm extends SciScrollable{
     }
 
     getElement(name){
-        return this.querySelector(`[name=${name}]`);
+        let slot = this.shadowRoot.querySelector("slot");
+        let parents = slot.assignedElements({flatten: true});
+        for (let parent of parents){
+            if (parent.getAttribute("name") === name){
+                return parent;
+            }
+            let element = parent.querySelector(`[name=${name}]`);
+            if (element !== null){
+                return element;
+            }
+        }
+        return null;
     }
 
     getElements(){
-        return this.querySelectorAll("[name]");
+        let elements = [];
+        let slot = this.shadowRoot.querySelector("slot");
+        let parents = slot.assignedElements({flatten: true});
+        for (let parent of parents){
+            if (parent.getAttribute("name") !== null){
+                elements.push(parent);
+            }
+            elements = [...elements, ...parent.querySelectorAll("[name]")];
+        }
+        return elements;
     }
 
     reset(){
@@ -136,13 +156,22 @@ class SciForm extends SciScrollable{
                 } catch (e){}
             }
             this.__updateChildren();
-            return Promise.resolve();
+            return Promise.resolve(true);
         } else {
-            return self.onReset()
-                .then(newData => {
-                    this.value = newData;
-                })
-                .catch(() => {});
+            let r = self.onReset();
+            if (r instanceof Promise){
+                return r
+                    .then(newData => {
+                        this.value = newData;
+                        return true;
+                    })
+                    .catch(() => {
+                        return false;
+                    });
+            } else {
+                return Promise.reject(new TypeError("sci-form: The onReset function did not return promise. Please, " +
+                    "check it again"));
+            }
         }
     }
 
@@ -163,6 +192,7 @@ class SciForm extends SciScrollable{
             return self.onSubmit(data)
                 .then(newData => {
                     self.value = newData;
+                    return newData;
                 })
                 .catch(messageList => {
                     for (let messageName in messageList){
@@ -174,9 +204,10 @@ class SciForm extends SciScrollable{
                             }
                         }
                     }
+                    return false;
                 });
         } else {
-            return Promise.resolve();
+            return Promise.resolve(data);
         }
     }
 

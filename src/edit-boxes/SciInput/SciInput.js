@@ -327,6 +327,9 @@ class SciInput extends SciEditor{
     }
 
     set value(value){
+        if (value === null){
+            value = "";
+        }
         this.shadowRoot.querySelector("input").value = value;
         this.__oldValue = value;
     }

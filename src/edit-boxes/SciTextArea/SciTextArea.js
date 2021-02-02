@@ -90,6 +90,9 @@ class SciTextArea extends SciEditor{
     }
 
     set value(value){
+        if (value === null){
+            value = "";
+        }
         this.shadowRoot.querySelector("textarea").value = value;
     }
 
