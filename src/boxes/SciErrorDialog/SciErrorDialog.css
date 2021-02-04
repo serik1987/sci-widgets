@@ -1,0 +1,16 @@
+@import url(../../core-styles.css);
+
+.message-body{
+    margin-top: 0;
+    text-align: center;
+}
+
+.message-detail{
+    display: none;
+    font-style: italic;
+    text-align: center;
+}
+
+.message-detail.on{
+    display: block;
+}

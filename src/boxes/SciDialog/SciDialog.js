@@ -231,3 +231,4 @@ class SciDialog extends SciWindow{
 
 SciDialog.SIZE_LIST = ["tiny", "small", "large"];
 SciDialog.observedAttributes = ["label", "permanent", "size", "width"];
+

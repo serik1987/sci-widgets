@@ -33,6 +33,11 @@ input[type=submit], input[type=reset]{
     width: 100%;
 }
 
+:host(.sci-error) input[type=submit], :host(.sci-error) input[type=reset]{
+    background-color: rgb(235, 65, 70);
+    border-color: rgb(235, 65, 78);
+}
+
 input[type=reset]{
     background: #fff;
     color: black;
@@ -41,6 +46,10 @@ input[type=reset]{
 
 input[type=submit]:hover, input[type=submit]:focus{
     background: rgb(0, 52, 155);
+}
+
+:host(.sci-error) input[type=submit]:hover, :host(.sci-error) input[type=submit]:focus{
+    background-color: rgb(200, 65, 70);
 }
 
 input[type=submit]:disabled{

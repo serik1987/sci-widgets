@@ -1,10 +1,27 @@
 @import url(../../core-styles.css);
 
+:host{
+    margin: 0;
+    padding: 0;
+}
+
+:host .window-overlapper{
+    z-index: 10;
+}
+
+:host([important]) .window-overlapper{
+    z-index: 1000;
+}
+
+:host([error]) .window-title{
+    background: rgb(235, 65, 70);
+}
+
 :host .window{
     box-sizing: border-box;
     width: 500px;
     border-radius: 1px;
-    box-shadow: 0px 2px 50px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 50px 10px rgba(0, 0, 0, 0.25);
     text-align: left;
 }
 
@@ -58,7 +75,11 @@
 }
 
 .window-title .close-button:hover{
-    background-color: rgb(0, 52, 155)
+    background-color: rgb(0, 52, 155);
+}
+
+:host([error]) .window-title .close-button:hover{
+    background-color: rgb(200, 65, 70);
 }
 
 sci-form{
