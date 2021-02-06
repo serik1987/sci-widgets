@@ -59,7 +59,9 @@ CLASS_MAP = {
     "lists/SciLivesearch": "sci-livesearch",
     "edit-boxes/SciTextArea": "sci-textarea",
     "boxes/SciDialog": "sci-dialog",
-    "boxes/SciErrorDialog": "sci-error-dialog"
+    "boxes/SciErrorDialog": "sci-error-dialog",
+    "boxes/SciMessageDialog": "sci-message-dialog",
+    "boxes/SciQuestionDialog": "sci-question-dialog"
 }
 
 
