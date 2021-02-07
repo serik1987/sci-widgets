@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>SciWidgets test page</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="fonts/stylesheet.css" />
+  <script src="sci-widgets.js" defer></script>
+
+  <style>
+    body{
+      margin: 10px;
+    }
+
+    .ruler{
+      display: none;
+      position: absolute;
+      background: red;
+      top: 0;
+      left: 0;
+      right: 10px;
+      bottom: 252px;
+    }
+
+    @media screen and (max-width: 400px){
+      body{
+        margin: 5px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Демонстрация работы sci-panel</h1>
+
+  <sci-panel label="Персональные данные" id="panel1">
+    <sci-input type="text" name="surname" label="Фамилия"></sci-input>
+    <sci-input type="text" name="first_name" label="Имя"></sci-input>
+    <sci-input type="text" name="middle_name" label="Отчество"></sci-input>
+    <sci-checkbox name="is_employee" label="Является сотрудником Института"></sci-checkbox>
+    <div class="buttons-wrapper">
+      <sci-button type="submit" name="submit" label="Сохранить"></sci-button>
+      <sci-button type="reset" name="reset" label="Сбросить"></sci-button>
+    </div>
+  </sci-panel>
+
+  <h2>Неактивная панель</h2>
+
+  <sci-panel label="Персональные данные" disabled>
+    <sci-input type="text" name="surname" label="Фамилия"></sci-input>
+    <sci-input type="text" name="first_name" label="Имя"></sci-input>
+    <sci-input type="text" name="middle_name" label="Отчество"></sci-input>
+    <sci-checkbox name="is_employee" label="Является сотрудником Института"></sci-checkbox>
+    <div class="buttons-wrapper">
+      <sci-button type="submit" name="submit" label="Сохранить"></sci-button>
+      <sci-button type="reset" name="reset" label="Сбросить"></sci-button>
+    </div>
+  </sci-panel>
+
+  <h2>Панель зафиксирована по ширине</h2>
+
+  <sci-panel label="Персональные данные" width="400">
+    <sci-input type="text" name="surname" label="Фамилия"></sci-input>
+    <sci-input type="text" name="first_name" label="Имя"></sci-input>
+    <sci-input type="text" name="middle_name" label="Отчество"></sci-input>
+    <sci-checkbox name="is_employee" label="Является сотрудником Института"></sci-checkbox>
+    <div class="buttons-wrapper">
+      <sci-button type="submit" name="submit" label="Сохранить"></sci-button>
+      <sci-button type="reset" name="reset" label="Сбросить"></sci-button>
+    </div>
+  </sci-panel>
+
+  <h2>Панель зафиксирована по высоте</h2>
+
+  <sci-panel label="Персональные данные" height="250">
+    <sci-input type="text" name="surname" label="Фамилия"></sci-input>
+    <sci-input type="text" name="first_name" label="Имя"></sci-input>
+    <sci-input type="text" name="middle_name" label="Отчество"></sci-input>
+    <sci-checkbox name="is_employee" label="Является сотрудником Института"></sci-checkbox>
+    <div class="buttons-wrapper">
+      <sci-button type="submit" name="submit" label="Сохранить"></sci-button>
+      <sci-button type="reset" name="reset" label="Сбросить"></sci-button>
+    </div>
+  </sci-panel>
+
+  <script>
+    let panel1 = document.querySelector("#panel1");
+
+    window.onload = function(){
+
+      ["sci-panel-expand", "sci-panel-compact", "sci-submit", "sci-reset"].forEach(eventName => {
+        panel1.addEventListener(eventName, event => {
+          console.log(event);
+        });
+      });
+
+    }
+  </script>
+
+</body>
+
+</html>

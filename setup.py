@@ -61,7 +61,8 @@ CLASS_MAP = {
     "boxes/SciDialog": "sci-dialog",
     "boxes/SciErrorDialog": "sci-error-dialog",
     "boxes/SciMessageDialog": "sci-message-dialog",
-    "boxes/SciQuestionDialog": "sci-question-dialog"
+    "boxes/SciQuestionDialog": "sci-question-dialog",
+    "boxes/SciPanel": "sci-panel"
 }
 
 

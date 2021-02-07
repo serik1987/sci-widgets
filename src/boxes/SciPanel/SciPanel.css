@@ -1,0 +1,33 @@
+@import url(../../core-styles.css);
+
+:host{
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 #bbb;
+    border: 1px solid rgb(186, 196, 209);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+label{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+:host([disabled]) label{
+    cursor: default;
+}
+
+:host([compacted]) label{
+    margin-top: 10px;
+}
+
+:host([compacted]) sci-form{
+    display: none;
+}
+
+:host([height]) sci-form{
+    height: calc(100% - 41px);
+}
