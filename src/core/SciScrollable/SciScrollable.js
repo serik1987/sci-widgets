@@ -146,11 +146,16 @@ class SciScrollable extends SciWidget{
         let cH = this.clientHeight;
         if (cH < sH && !this.classList.contains("scrollable")){
             this.classList.add("scrollable");
+            this.classList.remove("sci-not-offset-parent");
             this.__restrictedHeight = true;
         }
         if (cH >= sH && this.classList.contains("scrollable")){
             this.classList.remove("scrollable");
+            this.classList.add("sci-not-offset-parent");
             this.__restrictedHeight = false;
+        }
+        if (cH >= sH && !this.classList.contains("sci-not-offset-parent")){
+            this.classList.add("sci-not-offset-parent");
         }
 
         if (updatePosition){

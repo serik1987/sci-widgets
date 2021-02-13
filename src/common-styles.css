@@ -67,6 +67,10 @@ blockquote{
     font-size: 0;
 }
 
+.buttons-wrapper > *{
+    font-size: 14px;
+}
+
 
 /* Styles for list boxes, combo boxes, livesearch */
 
@@ -229,8 +233,21 @@ sci-list-box[disabled] li:hover{
 
 /* Additional styles for dialogs */
 
+sci-dialog *:first-child{
+    margin-top: 0;
+}
+
 @media screen and (max-width: 540px){
     sci-dialog .buttons-wrapper sci-button{
         margin-right: 0;
     }
+}
+
+/* Additional Styles for sci-list-input */
+
+sci-list-input .sci-placeholder{
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
 }

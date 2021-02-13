@@ -93,12 +93,20 @@ class SciExpandableWidget extends SciWidget{
 
     _adjustOpen(){
         let container = this.offsetParent;
-        let mH = container.clientHeight;
-        if (container instanceof HTMLBodyElement){
+        let mH, offset;
+        while (container !== null && !(container instanceof HTMLBodyElement)
+            && container.classList.contains("sci-not-offset-parent")){
+            container = container.offsetParent;
+        }
+        if (container === null || container instanceof HTMLBodyElement){
             mH = window.innerHeight;
+            offset = 0;
+        } else {
+            mH = container.clientHeight;
+            offset = container.getBoundingClientRect().top;
         }
         let hamburger = this.shadowRoot.querySelector(".hamburger");
-        let y0 = hamburger.getBoundingClientRect().bottom;
+        let y0 = hamburger.getBoundingClientRect().bottom - offset;
         let cH = this.content.scrollHeight + 2; // plus borders
         if (y0 + cH > mH){
             let h0 = hamburger.clientHeight;

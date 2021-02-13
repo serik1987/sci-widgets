@@ -8,8 +8,8 @@ import shutil
 RESULT_FILE = "sci-widgets.js"
 
 MODULES_PREINSTALL_ORDER = ["core/SciWidget", "core/SciScrollable", "core/SciExpandableWidget", "core/SciWindow",
-                            "edit-boxes/SciEditor", "edit-boxes/SciInput", "edit-boxes/SciSpinInput",
-                            "datetime/SciDate", "datetime/SciTime", "datetime/SciDatetime",
+                            "core/SciDraggable", "edit-boxes/SciEditor", "edit-boxes/SciInput",
+                            "edit-boxes/SciSpinInput", "datetime/SciDate", "datetime/SciTime", "datetime/SciDatetime",
                             "lists/SciItem", "lists/SciItemList"]
 
 MODULES_PREINSTALL = {
@@ -17,6 +17,7 @@ MODULES_PREINSTALL = {
     "core/SciScrollable": "modules/core",
     "core/SciExpandableWidget": "modules/core",
     "core/SciWindow": "modules/core",
+    "core/SciDraggable": "modules/core",
     "edit-boxes/SciEditor": "modules/edit-boxes",
     "edit-boxes/SciInput": "modules/edit-boxes",
     "edit-boxes/SciSpinInput": "modules/edit-boxes",
@@ -32,6 +33,7 @@ CLASS_MAP = {
     "lists/SciTreeNode": "sci-tree-node",
     "server/SciProgressBar": "sci-progress-bar",
     "core/SciWindow": "SciWindow",
+    "core/SciDraggable": "SciDraggable",
     "server/SciUpload": "sci-upload",
     "server/SciPhotoUpload": "sci-photo-upload",
     "buttons/SciRadioButton": "sci-radio-button",
@@ -62,7 +64,9 @@ CLASS_MAP = {
     "boxes/SciErrorDialog": "sci-error-dialog",
     "boxes/SciMessageDialog": "sci-message-dialog",
     "boxes/SciQuestionDialog": "sci-question-dialog",
-    "boxes/SciPanel": "sci-panel"
+    "boxes/SciPanel": "sci-panel",
+    "tables/SciListInput": "sci-list-input",
+    "tables/SciListInputItem": "sci-list-input-item"
 }
 
 

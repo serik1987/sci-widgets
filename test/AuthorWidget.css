@@ -1,0 +1,27 @@
+sci-list-input .edit-dialog .lab-id{
+    display: none;
+}
+
+sci-list-input .edit-dialog .user-id{
+    display: none;
+}
+
+sci-list-input .edit-dialog.employee .lab-id{
+    display: block;
+}
+
+sci-list-input .edit-dialog.employee .user-id{
+    display: block;
+}
+
+sci-list-input .edit-dialog.employee .name-ru{
+    display: none;
+}
+
+sci-list-input .edit-dialog.employee .name-en{
+    display: none;
+}
+
+sci-list-input .edit-dialog.language-en .name-ru{
+    display: none;
+}

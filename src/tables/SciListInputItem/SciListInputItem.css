@@ -1,0 +1,74 @@
+@import url(../../core-styles.css);
+
+:host{
+    display: inline-block;
+    border: 1px solid #1758da;
+    border-radius: 5px;
+    margin: 0 3px 2px 0;
+    padding: 0 5px 0 10px;
+    background: #fff;
+    font-size: 0;
+    cursor: move;
+}
+
+:host([selected]){
+    background: #1758da;
+}
+
+:host([error]){
+    background: rgb(235, 65, 70);
+    border-color: rgb(235, 65, 70);
+}
+
+label{
+    display: inline-block;
+    margin: 3px 10px 3px 0;
+    max-width: 300px;
+    font-size: 14px;
+    cursor: move;
+    text-overflow: ellipsis;
+}
+
+:host([selected]) label, :host([error]) label{
+    color: #fff;
+}
+
+.controls{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-right: 5px;
+    fill: #1758da;
+    stroke: #1758da;
+    cursor: pointer;
+}
+
+:host([selected]) .controls, :host([error]) .controls{
+    fill: #fff;
+    stroke: #fff;
+}
+
+.controls:last-child{
+    margin-right: 0;
+}
+
+/* disabled item */
+
+:host([disabled]){
+    border-color: rgb(186, 196, 209);
+    background: #fff;
+    cursor: default;
+}
+
+:host([disabled]) label{
+    color: rgb(186, 196, 209);
+    cursor: default;
+}
+
+:host([disabled]) .controls{
+    fill: rgb(186, 196, 209);
+    stroke: rgb(186, 196, 209);
+    cursor: default;
+}

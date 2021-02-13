@@ -1,0 +1,63 @@
+@import url(../../core-styles.css);
+
+.immediate-wrapper{
+    border-bottom: 1px solid rgb(186, 196, 209);
+    font-size: 0;
+}
+
+:host(.sci-focus) .immediate-wrapper{
+    border-bottom-color: #333;
+}
+
+.input-wrapper{
+    display: inline-block;
+    width: 300px;
+    margin-bottom: 2px;
+}
+
+input{
+    border: none;
+    width: 100%;
+    margin: 0 -5px 0 0;
+    padding: 0;
+    outline: none;
+    font-size: 14px;
+    height: 24px;
+}
+
+/* livesearch implementation */
+
+:host .hamburger {
+    border: none;
+}
+
+:host .hamburger .content{
+    border-color: #1758da;
+}
+
+:host .content ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+:host .content li{
+    padding: 5px;
+    border-bottom: 1px solid #1758da;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+:host .content li:last-child{
+    border-bottom: none;
+}
+
+:host .content li.selected{
+    background: #1758da;
+    color: #fff;
+}
+
+:host .content p{
+    margin: 0;
+    padding: 0;
+}

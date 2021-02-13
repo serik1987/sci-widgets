@@ -137,6 +137,14 @@ class SciDialog extends SciWindow{
         }
     }
 
+    get value(){
+        return this.__form.value;
+    }
+
+    set value(value){
+        this.__form.value = value;
+    }
+
     getElement(name){
         return this.__form.getElement(name);
     }
@@ -171,6 +179,8 @@ class SciDialog extends SciWindow{
                     this.__form.value = data;
                 }
                 this.__isModal = true;
+                let newEvent = new CustomEvent("sci-modal", {bubbles: true, detail: data});
+                this.dispatchEvent(newEvent);
                 return new Promise((resolve, reject) => {
                     self.__resolve = function(data){
                         self.__isModal = false;

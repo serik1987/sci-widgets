@@ -8,7 +8,9 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="fonts/stylesheet.css" />
+  <link rel="stylesheet" href="/test/AuthorWidget.css" />
   <script src="sci-widgets.js" defer></script>
+  <script src="/test/AuthorWidget.js"></script>
 
   <style>
     body{
@@ -31,11 +33,68 @@
       }
     }
 
+
+    /* Special styles */
+
+    sci-list-input .add-dialog .author-name{
+      font-style: italic;
+    }
+
   </style>
 </head>
 <body>
 
+  <h1>Демонстрация работы элемента sci-list-input</h1>
 
+  <sci-list-input label="Список авторов" id="author_list">
+    <sci-dialog slot="add-dialog" label="Добавить автора" class="add-dialog">
+      <p>Для завершения процедуры добавления автора <span class="author-name"></span>, пожалуйста, укажите его фамилию
+        и инициалы на английском языке, после чего нажмите клавишу Enter</p>
+      <sci-input type="text" name="name_en" label="Фамилия и инициалы (на англ. яз.)" class="input-box"></sci-input>
+      <div class="buttons-wrapper">
+        <sci-button type="submit" name="submit" label="Добавить автора"></sci-button>
+      </div>
+    </sci-dialog>
+    <sci-dialog slot="edit-dialog" label="Редактировать автора" class="edit-dialog">
+      <sci-checkbox name="is_employee" label="Является сотрудником Института"></sci-checkbox>
+      <sci-input type="text" name="name_ru" label="Фамилия и инициалы соавтора (на русск. яз.)" class="name-ru"></sci-input>
+      <sci-input type="text" name="name_en" label="Фамилия и инициалы соавтора (на англ. яз.)" class="name-en"></sci-input>
+      <sci-combo-box name="lid" label="Лаборатория" class="lab-id">
+        <ul>
+          <li data-value="1">Лаборатория биофизики</li>
+          <li data-value="2">Лаборатория нейрофизиологии</li>
+          <li data-value="3">Лаборатория нейроинформатики</li>
+        </ul>
+      </sci-combo-box>
+      <sci-combo-box name="uid" label="Выберите нужного сотрудника" class="user-id">
+        <ul>
+          <li data-value="1">Иванов Иван Иванович</li>
+          <li data-value="2">Петров Пётр Петрович</li>
+          <li data-value="3">Сидоров Сидор Сидорович</li>
+          <li data-value="4">Онуфриев Георгий Георгиевич</li>
+          <li data-value="5">Сотрудник 5</li>
+          <li data-value="6">Сотрудник 6</li>
+          <li data-value="7">Сотрудник 7</li>
+          <li data-value="8">Сотрудник 8</li>
+          <li data-value="9">Сотрудник 9</li>
+          <li data-value="10">Сотрудник 10</li>
+          <li data-value="11">Сотрудник 11</li>
+        </ul>
+      </sci-combo-box>
+      <div class="buttons-wrapper">
+        <sci-button type="submit" name="submit" label="OK"></sci-button>
+        <sci-button type="reset" name="reset" label="Отмена"></sci-button>
+      </div>
+    </sci-dialog>
+  </sci-list-input>
+
+  <script>
+
+    let author_list_element = document.getElementById("author_list");
+
+    let author_list = new AuthorWidget(author_list_element);
+    author_list.language = "en";
+  </script>
 
 </body>
 
